@@ -13,7 +13,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit-icons.min.js"></script>
 
+    <!-- Google Font Comfortaa -->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
     <div uk-sticky="media: 960" class="uk-container uk-container-expand">
@@ -37,8 +41,11 @@
                     <a href="#">API Reference</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="#">HyperOOP</a></li>
-                            <li><a href="#">Router</a></li>
+                            <li><a href="#">
+                                <img src="img/logo.png" class="ho-dropdown-img" style="width: 15px; height: 15px"/>
+                                HyperOOP
+                            </a></li>
+                            <li><a href="#"><i class="fas fa-route ho-dropdown-icon"></i>Router</a></li>
                         </ul>
                     </div>
                 </li>
@@ -46,9 +53,9 @@
                     <a href="#">Examples</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="#">Counter</a></li>
-                            <li><a href="#">Todo</a></li>
-                            <li><a href="#">Routing</a></li>
+                            <li><a href="#"><i class="fas fa-plus-square ho-dropdown-icon"></i>Counter</a></li>
+                            <li><a href="#"><i class="fas fa-clipboard-list ho-dropdown-icon"></i>Todo</a></li>
+                            <li><a href="#"><i class="fas fa-hiking ho-dropdown-icon"></i>Routing</a></li>
                         </ul>
                     </div>
                 </li>
@@ -56,6 +63,9 @@
             </ul>
         </div>
     </nav>
+    </div>
+    <div class="ho-sidebar-left">
+        <h4 class="ho-h4">API Reference</h4>
     </div>
 </body>
 </html>

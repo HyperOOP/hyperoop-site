@@ -2,6 +2,7 @@
 
 @base-color-a: #52a940;
 @base-color-b: #912fa5;
+@base-font-color: darken(@base-color-b, 20%);
 
 @search-border-color: lighten(gray, 40%);
 @search-border-color-focus: lighten(@base-color-b, 5%);
@@ -12,8 +13,11 @@
 
 @navbar-dropdown-margin: -15px;
 
+@sidebar-left-width: 240px;
+
 .hook-navbar-container() {
     background-color: white;
+    border-bottom: 1px @global-border solid; 
 }
 
 .ho-menu-colors {
@@ -88,4 +92,32 @@
 
 .ho-scaled-search-icon {
     transform: scale(0.7, 0.7);
+}
+
+.ho-sidebar-left {
+    position: fixed;
+    top: @navbar-nav-item-height;
+    bottom: 0;
+    box-sizing: border-box;
+    width: @sidebar-left-width !important;
+    padding: 40px 40px 60px 40px;
+    border-right: 1px @global-border solid;
+    overflow: auto;
+}
+
+.ho-dropdown-img {
+    margin-right: 5px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+.ho-dropdown-icon {
+    .ho-dropdown-img();
+    margin-right: 10px;
+    opacity: 0.5;
+}
+
+.ho-h4 {
+    color: @base-font-color;
 }

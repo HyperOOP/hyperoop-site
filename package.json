@@ -6,11 +6,13 @@
   "main": "dist/index.html",
   "scripts": {
     "watch:sketch:css": "npm-watch build:sketch:css",
-    "build:sketch:css": "lessc --rewrite-urls=all sketch/less/style.less sketch/css/style.css "
+    "build:sketch:css": "lessc --rewrite-urls=all sketch/less/style.less sketch/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\""
   },
   "watch": {
     "build:sketch:css": {
-      "patterns":   ["sketch/less"],
+      "patterns": [
+        "sketch/less"
+      ],
       "extensions": "less"
     }
   },
@@ -33,6 +35,7 @@
   "homepage": "https://github.com/algebraic-brain/hyperoop-site#readme",
   "devDependencies": {
     "less": "^3.9.0",
+    "less-plugin-clean-css": "^1.5.1",
     "npm-watch": "^0.5.0",
     "uikit": "^3.0.0-rc.25"
   }
