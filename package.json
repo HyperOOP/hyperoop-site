@@ -1,0 +1,39 @@
+{
+  "name": "hyperoop-site",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Site representing HyperOOP",
+  "main": "dist/index.html",
+  "scripts": {
+    "watch:sketch:css": "npm-watch build:sketch:css",
+    "build:sketch:css": "lessc --rewrite-urls=all sketch/less/style.less sketch/css/style.css "
+  },
+  "watch": {
+    "build:sketch:css": {
+      "patterns":   ["sketch/less"],
+      "extensions": "less"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/algebraic-brain/hyperoop-site.git"
+  },
+  "keywords": [
+    "hyperoop",
+    "web",
+    "SPA",
+    "framework",
+    "site"
+  ],
+  "author": "Osman Bineev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/algebraic-brain/hyperoop-site/issues"
+  },
+  "homepage": "https://github.com/algebraic-brain/hyperoop-site#readme",
+  "devDependencies": {
+    "less": "^3.9.0",
+    "npm-watch": "^0.5.0",
+    "uikit": "^3.0.0-rc.25"
+  }
+}

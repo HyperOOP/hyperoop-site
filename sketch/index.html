@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HyperOOP Docs</title>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit-icons.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet"> 
+</head>
+<body>
+    <div uk-sticky="media: 960" class="uk-container uk-container-expand">
+    <nav uk-navbar class="uk-navbar-container">
+        <div class="uk-navbar-left">
+            <img src="img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image">
+            <span class="ho-logo-text">HyperOOP</span>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <div class="uk-navbar-item">
+                        <form class="uk-search uk-search-navbar">
+                            <span uk-search-icon class="ho-scaled-search-icon"></span>
+                            <input class="uk-search-input" type="search">
+                        </form>
+                    </div>                
+                </li>
+                <!--<li><a href="#" class="ho-donate">Donate</a></li>-->
+                <li><a href="#">Tutorial</a></li>
+                <li>
+                    <a href="#">API Reference</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="#">HyperOOP</a></li>
+                            <li><a href="#">Router</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">Examples</a></li>
+            </ul>
+        </div>
+    </nav>
+    </div>
+</body>
+</html>
