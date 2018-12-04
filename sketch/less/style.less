@@ -3,16 +3,18 @@
 @base-color-a: #52a940;
 @base-color-b: #912fa5;
 @base-font-color: darken(@base-color-b, 20%);
+
 @navbar-background-color: lighten(@base-color-a, 30%);
+@navbar-dropdown-border-color: darken(@navbar-background-color, 10%);
+@navbar-dropdown-margin: -15px;
+@navbar-li-hover-color: darken(@navbar-background-color, 50%);
 
 @search-border-color: lighten(gray, 40%);
-@search-border-color-focus: lighten(@base-color-b, 5%);
+@search-border-color-focus: darken(@navbar-background-color, 30%);
 @search-border-radius: 10px;
 @search-width: 250px;
 @search-height: 25px;
 @search-font-size: 0.875rem;
-
-@navbar-dropdown-margin: -15px;
 
 @sidebar-left-width: 240px;
 
@@ -28,7 +30,7 @@
 .ho-menu-colors {
     color: @base-font-color;
     &:hover {
-        color: @base-color-b;
+        color: @navbar-li-hover-color; //@base-color-b;
     }
 }
 
@@ -42,7 +44,15 @@
     }
 
     .uk-navbar-nav > li > a.uk-open {
-        color: @base-color-b;
+        color: @navbar-li-hover-color; //@base-color-b;
+    }
+
+    .uk-navbar-dropdown {
+        width: none;
+        border: 1px solid @navbar-dropdown-border-color;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 10px 20px 10px 20px;
     }
 
     .uk-navbar-dropdown-nav > li > a {
@@ -62,6 +72,24 @@
             border: 1px solid @search-border-color-focus;
             border-radius: @search-border-radius;
         }
+    }
+
+    ul.uk-nav > li.uk-active > a::before {
+        content: "";
+        display: list-item;
+        position: relative;
+        top: 11px;
+        left: -25px;
+        width: 15px;
+        border-bottom: 1px solid @search-border-color-focus;
+    }
+
+    .uk-nav-default .uk-nav-header {
+        color: @base-font-color;
+    }
+
+    .ho-sidebar-left > .uk-nav > li:not(.uk-nav-header) {
+        margin-left: 10px;
     }
 }
 
