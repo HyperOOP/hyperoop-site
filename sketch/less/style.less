@@ -16,8 +16,12 @@
 @sidebar-left-width: 240px;
 
 .hook-navbar-container() {
-    background-color: white;
+    background-color: lighten(@base-color-a, 30%);
     border-bottom: 1px @global-border solid; 
+}
+
+.ho-navbar {
+    background-color: lighten(@base-color-a, 30%);
 }
 
 .ho-menu-colors {
@@ -57,12 +61,13 @@
     }
 
     .uk-search-navbar {
-        border: 1px solid @search-border-color;
-        border-radius: @search-border-radius;
         width: @search-width;
         .uk-search-input {
+            border: 1px solid @search-border-color;
+            border-radius: @search-border-radius;
             height: @search-height;
             font-size: @search-font-size;
+            background-color: white;
         }
         input:focus {
             border: 1px solid @search-border-color-focus;
