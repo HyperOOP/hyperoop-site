@@ -137,3 +137,47 @@
 .ho-h4 {
     color: @base-font-color;
 }
+
+.ho-main {
+    margin-left: @sidebar-left-width !important;
+}
+
+.ho-main .uk-container {
+    padding-left: @container-padding-horizontal;
+    padding-right: @container-padding-horizontal;
+}
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+    .ho-main {
+        margin-left: 0 !important;
+    }
+        
+    .ho-main .uk-container {
+        padding-left: @container-padding-horizontal-s;
+        padding-right: @container-padding-horizontal-s;
+    }
+}
+
+@media (max-width: @breakpoint-small) {
+    .ho-main {
+        margin-left: 0 !important;
+    }
+        
+    .ho-main .uk-container {
+        padding-left: @container-padding-horizontal-s;
+        padding-right: @container-padding-horizontal-s;
+    }
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+    .ho-main {
+        margin-left: @sidebar-left-width !important;
+    }
+    
+    .ho-main .uk-container {
+        padding-left: @container-padding-horizontal-m;
+        padding-right: @container-padding-horizontal-m;
+    }
+}
