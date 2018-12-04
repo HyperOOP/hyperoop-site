@@ -3,6 +3,7 @@
 @base-color-a: #52a940;
 @base-color-b: #912fa5;
 @base-font-color: darken(@base-color-b, 20%);
+@navbar-background-color: lighten(@base-color-a, 30%);
 
 @search-border-color: lighten(gray, 40%);
 @search-border-color-focus: lighten(@base-color-b, 5%);
@@ -16,16 +17,16 @@
 @sidebar-left-width: 240px;
 
 .hook-navbar-container() {
-    background-color: lighten(@base-color-a, 30%);
+    background-color: @navbar-background-color;
     border-bottom: 1px @global-border solid; 
 }
 
 .ho-navbar {
-    background-color: lighten(@base-color-a, 30%);
+    background-color: @navbar-background-color;
 }
 
 .ho-menu-colors {
-    color: darken(@base-color-b, 20%);
+    color: @base-font-color;
     &:hover {
         color: @base-color-b;
     }
@@ -39,18 +40,6 @@
     .uk-navbar-nav > li > a {
         .ho-menu-colors();
     }
-
-    /*
-    .uk-navbar-nav > li > a.ho-donate {
-        margin-left: 2px;
-        color: saturate(@base-color-a, 40%);
-        &:hover {
-            color: saturate(@base-color-a, 80%);
-            font-weight: bold;
-            margin-left: 0;
-        }
-    }
-    */
 
     .uk-navbar-nav > li > a.uk-open {
         color: @base-color-b;
@@ -85,15 +74,9 @@
 .ho-logo-text {
     .uk-text-bold();
     font-family: Comfortaa;
-    color: darken(@base-color-b, 20%);
+    color: @base-font-color;
     margin: 3px 0 0 10px;
 }
-
-/*
-.ho-donate {
-    font-weight: normal;
-}
-*/
 
 .ho-scaled-search-icon {
     transform: scale(0.7, 0.7);
