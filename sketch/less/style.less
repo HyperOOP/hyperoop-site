@@ -2,7 +2,7 @@
 
 @base-color-a: #52a940;
 @base-color-b: #912fa5;
-@base-font-color: darken(@base-color-b, 20%);
+@base-control-text-color: darken(@base-color-b, 20%);
 
 @navbar-background-color: lighten(@base-color-a, 30%);
 @navbar-dropdown-border-color: darken(@navbar-background-color, 10%);
@@ -28,7 +28,7 @@
 }
 
 .ho-menu-colors {
-    color: @base-font-color;
+    color: @base-control-text-color;
     &:hover {
         color: @navbar-li-hover-color; //@base-color-b;
     }
@@ -85,7 +85,7 @@
     }
 
     .uk-nav-default .uk-nav-header {
-        color: @base-font-color;
+        color: @base-control-text-color;
     }
 
     .ho-sidebar-left > .uk-nav > li:not(.uk-nav-header) {
@@ -102,7 +102,7 @@
 .ho-logo-text {
     .uk-text-bold();
     font-family: Comfortaa;
-    color: @base-font-color;
+    color: @base-control-text-color;
     margin: 3px 0 0 10px;
 }
 
@@ -121,21 +121,8 @@
     overflow: auto;
 }
 
-.ho-dropdown-img {
-    margin-right: 5px;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    opacity: 0.7;
-}
-
-.ho-dropdown-icon {
-    .ho-dropdown-img();
-    margin-right: 10px;
-    opacity: 0.5;
-}
-
 .ho-h4 {
-    color: @base-font-color;
+    color: @base-control-text-color;
 }
 
 .ho-main {
@@ -147,7 +134,6 @@
     padding-right: @container-padding-horizontal;
 }
 
-/* Phone landscape and bigger */
 @media (min-width: @breakpoint-small) {
     .ho-main {
         margin-left: 0 !important;
@@ -170,7 +156,6 @@
     }
 }
 
-/* Tablet landscape and bigger */
 @media (min-width: @breakpoint-medium) {
     .ho-main {
         margin-left: @sidebar-left-width !important;
