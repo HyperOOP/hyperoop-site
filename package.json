@@ -9,7 +9,8 @@
     "build:sketch:css": "lessc --rewrite-urls=all sketch/less/style.less sketch/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
     "build:documenter": "tsc -p tools/documenter/tsconfig.json",
     "build:apidocs": "npm run build:documenter && node tools/dist/documenter.js apidocs.toml",
-    "clean:apidocs": "rimraf static/data"
+    "clean:apidocs": "rimraf static/data",
+    "lint": "tslint -c tslint.json 'tools/**/*.ts'"
   },
   "watch": {
     "build:sketch:css": {
@@ -41,12 +42,13 @@
     "less": "^3.9.0",
     "less-plugin-clean-css": "^1.5.1",
     "npm-watch": "^0.5.0",
+    "tslint": "^5.11.0",
     "typescript": "^3.2.1",
     "uikit": "^3.0.0-rc.25"
   },
   "dependencies": {
     "hyperoop": "^0.2.5",
-    "hyperoop-router": "^0.1.8",
+    "hyperoop-router": "^0.1.9",
     "toml": "^2.3.3"
   }
 }
