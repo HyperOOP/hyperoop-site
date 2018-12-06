@@ -5,17 +5,19 @@
   "description": "Site representing HyperOOP",
   "main": "dist/index.html",
   "scripts": {
-    "watch:sketch:css": "npm-watch build:sketch:css",
-    "build:sketch:css": "lessc --rewrite-urls=all sketch/less/style.less sketch/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
+    "watch:css": "npm-watch build:css",
+    "build:css": "lessc --rewrite-urls=all src/less/style.less static/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
     "build:documenter": "tsc -p tools/documenter/tsconfig.json",
     "build:apidocs": "npm run build:documenter && node tools/dist/documenter.js apidocs.toml",
     "clean:apidocs": "rimraf static/data",
-    "lint": "tslint -c tslint.json 'tools/**/*.ts'"
+    "lint:tools": "tslint -c tslint.json 'tools/**/*.ts'",
+    "lint:src": "tslint -c tslint.json 'src/**/*.ts'",
+    "lint": "npm run lint:tools && npm run lint:src"
   },
   "watch": {
-    "build:sketch:css": {
+    "build:css": {
       "patterns": [
-        "sketch/less"
+        "src/less"
       ],
       "extensions": "less"
     }
@@ -47,7 +49,7 @@
     "uikit": "^3.0.0-rc.25"
   },
   "dependencies": {
-    "hyperoop": "^0.2.5",
+    "hyperoop": "^0.2.6",
     "hyperoop-router": "^0.1.9",
     "toml": "^2.3.3"
   }

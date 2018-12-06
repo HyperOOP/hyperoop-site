@@ -4,6 +4,7 @@ import util from "util";
 
 import { parse as parseTOML } from "toml";
 import * as ts from "typescript";
+import { ITree } from "./tree";
 
 interface IModuleConf {
     path: string;
@@ -22,14 +23,6 @@ const mkdir = util.promisify(fs.mkdir);
 
 const cmtRe = /\/\*\*((\*(?!\/)|[^*])*)\*\//;
 
-interface ITree {
-    kind: string;
-    comment?: string;
-    decl?: string;
-    children?: ITree[];
-    name?: string;
-}
-
 const complexNode = (n: ITree): boolean =>
     n.kind === "ClassDeclaration" || n.kind === "InterfaceDeclaration";
 
@@ -45,7 +38,7 @@ const nodeName = (node: ts.Node): string => {
 function showNodes(ast: ts.Node, source: string, tree: ITree) {
     ts.forEachChild(ast, (node) => {
         if (node.kind === ts.SyntaxKind.ExportKeyword) { return; }
-        const n: any = {};
+        const n: ITree = {kind: ts.SyntaxKind[node.kind]};
         const start = node.getFullStart();
         const end = start + node.getFullWidth();
         const decl = source.slice(start, end).trim();
@@ -56,7 +49,6 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
         } else {
             return;
         }
-        n.kind = ts.SyntaxKind[node.kind];
 
         const nname = nodeName(node);
         if (nname !== null) {

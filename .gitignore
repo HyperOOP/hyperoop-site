@@ -1,5 +1,6 @@
 **/node_modules/**
 package-lock.json
-sketch/css/*
 **/dist/*
-/static/*
+/static/css/*
+/static/js/*
+**/log.txt
