@@ -1,20 +1,25 @@
+import fs from "fs";
+import util from "util";
+import path from "path";
+
 import * as ts from "typescript";
-import { readFileSync, writeFileSync } from "fs";
+import { parse as parseTOML } from "toml";
+import { resolve } from "dns";
 
-if (process.argv.length < 4) {
-    console.log("not enough parameters");
-    process.exit(1);
+interface IModuleConf {
+    path: string;
+    exclude: string[];
 }
-const fname = process.argv[2];
-const oname = process.argv[3];
-const code = readFileSync(fname).toString();
 
-let sourceFile = ts.createSourceFile(
-    fname,
-    code,
-    ts.ScriptTarget.ES2015,
-    true
-);
+interface IConfig {
+    outDir: string;
+    modules: {[key in string]: IModuleConf};
+}
+
+const writeFile = util.promisify(fs.writeFile);
+const readFile = util.promisify(fs.readFile);
+const readDir = util.promisify(fs.readdir);
+const mkdir = util.promisify(fs.mkdir);
 
 const cmtRe = /\/\*\*((\*(?!\/)|[^*])*)\*\//;
 
@@ -81,8 +86,54 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
     })
 }
 
+class Documenter {
+    public async main() {
+        if (process.argv.length < 3) {
+            console.log("not enough parameters");
+            process.exit(1);
+        }
+        
+        const cfgText = await readFile(process.argv[2], { encoding: "utf8"});
+        const cfg: IConfig = parseTOML(cfgText);
 
-let tree = {kind: "ModuleDeclaration", children: []};
-showNodes(sourceFile, code, tree);
+        const outPath = cfg.outDir.split("/");
 
-writeFileSync(oname, JSON.stringify(tree, null, 2), { encoding: "utf8"});  
+        let p = "./";
+        for (const name of outPath) {
+            p = path.join(p, name);
+            await new Promise<void>((resolve)=>{
+                fs.access(p, fs.constants.F_OK, (err) => {
+                    if (err) mkdir(p);
+                    resolve();
+                })
+            })
+        }
+    
+        for (const modname in cfg.modules) {
+            const modcfg = cfg.modules[modname];
+            await this.genModuleDocs(modname, modcfg, cfg.outDir);
+        }
+    }
+    
+    private async genModuleDocs(modName: string, modCfg: IModuleConf, outDir: string) {
+        const files = (await readDir(modCfg.path)).filter((name) => 
+            /.*\.d\.ts$/.test(name) && 
+            modCfg.exclude.indexOf(name.slice(0,-5)) < 0);
+        const tree = {kind: "ModuleDeclaration", children: []};
+        for (const fname of files) {
+            const fpath = path.join(modCfg.path, fname);
+            await this.genFileDoc(modName, fpath, tree);
+        }
+
+        await writeFile(path.join(outDir, modName+".json"),
+            JSON.stringify(tree, null, 2), {flag: "w", encoding: "utf8"});
+    }
+    
+    private async genFileDoc(modName: string, filePath: string, tree: ITree) {
+        const code = await readFile(filePath, {encoding: "utf8"});
+        const sourceFile = ts.createSourceFile(filePath, code, ts.ScriptTarget.ES2015, true);
+        showNodes(sourceFile, code, tree);
+    }
+}
+
+new Documenter().main();

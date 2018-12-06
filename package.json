@@ -7,7 +7,9 @@
   "scripts": {
     "watch:sketch:css": "npm-watch build:sketch:css",
     "build:sketch:css": "lessc --rewrite-urls=all sketch/less/style.less sketch/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
-    "build:documenter": "tsc -p tools/documenter/tsconfig.json"
+    "build:documenter": "tsc -p tools/documenter/tsconfig.json",
+    "build:apidocs": "npm run build:documenter && node tools/dist/documenter.js apidocs.toml",
+    "clean:apidocs": "rimraf static/data"
   },
   "watch": {
     "build:sketch:css": {
@@ -43,7 +45,8 @@
     "uikit": "^3.0.0-rc.25"
   },
   "dependencies": {
-    "hyperoop": "^0.2.4",
-    "hyperoop-router": "^0.1.7"
+    "hyperoop": "^0.2.5",
+    "hyperoop-router": "^0.1.8",
+    "toml": "^2.3.3"
   }
 }

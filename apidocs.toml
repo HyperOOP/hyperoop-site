@@ -1,0 +1,9 @@
+outDir = "static/data"
+
+[modules.HyperOOP]
+path = "node_modules/hyperoop/dist"
+exclude = ["proxperty"]
+
+[modules.Router]
+path = "node_modules/hyperoop-router/dist"
+exclude = ["index"]
