@@ -6,874 +6,153 @@
 > hyperoop-site@0.0.1 build:documenter /home/bosm/src/hyperoop-project/site
 > tsc -p tools/documenter/tsconfig.json
 
->>> NodeObject {
-  pos: 1325,
-  end: 1407,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   SourceFileObject {
-     pos: 0,
-     end: 3479,
-     flags: 4194304,
-     transformFlags: undefined,
-     parent: undefined,
-     kind: 279,
-     text: 'import * as hyperapp from "hyperapp";\r\nimport Hist from "redoundo";\r\ninterface ISpin {\r\n    Value: boolean;\r\n}\r\n/** Type of renderer that should be called for page re-rendering. */\r\nexport interface IRenderer {\r\n    render: () => (spin: ISpin) => ISpin;\r\n}\r\n/** VDOM representation of an `Element`. */\r\nexport declare type VNode<A = {}> = hyperapp.VNode<A>;\r\n/** Lazy VNode is a function with no argument that returns VNode */\r\nexport declare type LazyVNode<A = {}> = () => VNode<A>;\r\n/** A ImmediateComponent is a function that returns a custom VNode. */\r\nexport declare type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => VNode<A>;\r\n/** A LazyComponent is a function that returns a custom LazyVNode. */\r\nexport declare type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => LazyVNode<A>;\r\n/** A Component can be lazy or immediate. */\r\nexport declare type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;\r\n/** Type of child VDOM elements */\r\nexport declare type Child = VNode | string | number | null;\r\ndeclare type NameType<A> = Component<A> | string;\r\ndeclare type Children = Array<Child | Child[]>;\r\n/** Type of jsx factory function */\r\nexport declare type JSXFactory = <A>(nodeName: NameType<A>, attributes?: A, ...children: Children) => VNode<A>;\r\n/** JSX factory function, creates `VNode`s */\r\nexport declare let h: JSXFactory;\r\n/** initialize DOM element with a virtual node and actions object\r\n *\r\n * @param el\r\n * @param view\r\n */\r\nexport declare function init<S extends {}, A extends Actions<S>>(el: HTMLElement, v: LazyVNode, a: A): void;\r\n/** Interface of a parental `Actions` */\r\nexport interface IActionsParent {\r\n    /** renderer that should be called for page re-rendering */\r\n    readonly Renderer: IRenderer;\r\n    /** `redoundo.Hist` object for redo/undo functionality */\r\n    readonly History: Hist;\r\n}\r\n/** Class of hyperoop top-level action */\r\nexport declare class Actions<S extends {}> {\r\n    /** state object */\r\n    readonly State: S;\r\n    /** state object that remember previous states and has redo/undo functionality */\r\n    readonly Remember: S;\r\n    /** renderer that should be called for page re-rendering */\r\n    readonly Renderer: IRenderer;\r\n    /** `redoundo.Hist` object implements redo/undo functionality */\r\n    readonly History: Hist;\r\n    private orig;\r\n    private state;\r\n    private remember;\r\n    private renderer;\r\n    /** Construct an `Actions` object\r\n     *\r\n     * @param start state on start\r\n     * @param hist `redoundo.Hist` object implements redo/undo functionality\r\n     */\r\n    constructor(start: S, hist?: number | Hist);\r\n    /** Partially sets a new state\r\n     *\r\n     * @param s new state data\r\n     * @param remember remember previous state using `redoundo.Hist` or not?\r\n     */\r\n    set(s: Partial<S>, remember?: boolean): void;\r\n    /** Initialize `Actions` with new renderer\r\n     *\r\n     * @param r\r\n     */\r\n    init(r: IRenderer): void;\r\n}\r\n/** Class of hyperoop sub-actions */\r\nexport declare class SubActions<S extends {}> extends Actions<S> {\r\n    /** Constructs `SubActions` object inheriting `History` and `Renderer` from a parent.\r\n     *  NOTE! If `SubActions` object created before first rendering then you will need\r\n     *  to call it\'s `init` manually.\r\n     *\r\n     * @param start state on start\r\n     * @param parent parent `(Sub)Actions` object.\r\n     */\r\n    constructor(start: S, parent: IActionsParent);\r\n}\r\nexport {};\r\n',
-     bindDiagnostics: [],
-     bindSuggestionDiagnostics: undefined,
-     languageVersion: 2,
-     fileName: 'node_modules/hyperoop/dist/hyperoop.d.ts',
-     languageVariant: 0,
-     isDeclarationFile: true,
-     scriptKind: 3,
-     pragmas: Map {},
-     checkJsDirective: undefined,
-     referencedFiles: [],
-     typeReferenceDirectives: [],
-     libReferenceDirectives: [],
-     amdDependencies: [],
-     hasNoDefaultLib: false,
-     statements: 
-      [ [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Circular],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        pos: 0,
-        end: 3477 ],
-     endOfFileToken: 
-      TokenObject {
-        pos: 3477,
-        end: 3479,
-        flags: 4194304,
-        parent: [Circular],
-        kind: 1 },
-     externalModuleIndicator: 
-      NodeObject {
-        pos: 0,
-        end: 37,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: [Circular],
-        kind: 249,
-        decorators: undefined,
-        modifiers: undefined,
-        importClause: [Object],
-        moduleSpecifier: [Object],
-        modifierFlagsCache: 536870912 },
-     nodeCount: 375,
-     identifierCount: 121,
-     identifiers: 
-      Map {
-        'hyperapp' => 'hyperapp',
-        'Hist' => 'Hist',
-        'redoundo' => 'redoundo',
-        'ISpin' => 'ISpin',
-        'Value' => 'Value',
-        'IRenderer' => 'IRenderer',
-        'render' => 'render',
-        'spin' => 'spin',
-        'VNode' => 'VNode',
-        'A' => 'A',
-        'LazyVNode' => 'LazyVNode',
-        'ImmediateComponent' => 'ImmediateComponent',
-        'attributes' => 'attributes',
-        'children' => 'children',
-        'Array' => 'Array',
-        'LazyComponent' => 'LazyComponent',
-        'Component' => 'Component',
-        'Child' => 'Child',
-        'NameType' => 'NameType',
-        'Children' => 'Children',
-        'JSXFactory' => 'JSXFactory',
-        'nodeName' => 'nodeName',
-        'h' => 'h',
-        'init' => 'init',
-        'S' => 'S',
-        'Actions' => 'Actions',
-        'el' => 'el',
-        'HTMLElement' => 'HTMLElement',
-        'v' => 'v',
-        'a' => 'a',
-        'IActionsParent' => 'IActionsParent',
-        'Renderer' => 'Renderer',
-        'History' => 'History',
-        'State' => 'State',
-        'Remember' => 'Remember',
-        'orig' => 'orig',
-        'state' => 'state',
-        'remember' => 'remember',
-        'renderer' => 'renderer',
-        'start' => 'start',
-        'hist' => 'hist',
-        'set' => 'set',
-        's' => 's',
-        'Partial' => 'Partial',
-        'r' => 'r',
-        'SubActions' => 'SubActions',
-        'parent' => 'parent' },
-     parseDiagnostics: [] },
-  kind: 219,
-  jsDoc: 
-   [ NodeObject {
-       pos: 1327,
-       end: 1372,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: undefined,
-       comment: 'JSX factory function, creates `VNode`s' } ],
-  decorators: undefined,
-  modifiers: 
-   [ TokenObject {
-       pos: 1325,
-       end: 1380,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 85 },
-     TokenObject {
-       pos: 1380,
-       end: 1388,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 125 },
-     pos: 1325,
-     end: 1388 ],
-  declarationList: 
-   NodeObject {
-     pos: 1388,
-     end: 1406,
-     flags: 4194305,
-     transformFlags: undefined,
-     parent: [Circular],
-     kind: 238,
-     declarations: [ [Object], pos: 1392, end: 1406 ] } }
->>> NodeObject {
-  pos: 2431,
-  end: 2651,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   NodeObject {
-     pos: 1895,
-     end: 2981,
-     flags: 4194304,
-     transformFlags: undefined,
-     parent: 
-      SourceFileObject {
-        pos: 0,
-        end: 3479,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: undefined,
-        kind: 279,
-        text: 'import * as hyperapp from "hyperapp";\r\nimport Hist from "redoundo";\r\ninterface ISpin {\r\n    Value: boolean;\r\n}\r\n/** Type of renderer that should be called for page re-rendering. */\r\nexport interface IRenderer {\r\n    render: () => (spin: ISpin) => ISpin;\r\n}\r\n/** VDOM representation of an `Element`. */\r\nexport declare type VNode<A = {}> = hyperapp.VNode<A>;\r\n/** Lazy VNode is a function with no argument that returns VNode */\r\nexport declare type LazyVNode<A = {}> = () => VNode<A>;\r\n/** A ImmediateComponent is a function that returns a custom VNode. */\r\nexport declare type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => VNode<A>;\r\n/** A LazyComponent is a function that returns a custom LazyVNode. */\r\nexport declare type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => LazyVNode<A>;\r\n/** A Component can be lazy or immediate. */\r\nexport declare type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;\r\n/** Type of child VDOM elements */\r\nexport declare type Child = VNode | string | number | null;\r\ndeclare type NameType<A> = Component<A> | string;\r\ndeclare type Children = Array<Child | Child[]>;\r\n/** Type of jsx factory function */\r\nexport declare type JSXFactory = <A>(nodeName: NameType<A>, attributes?: A, ...children: Children) => VNode<A>;\r\n/** JSX factory function, creates `VNode`s */\r\nexport declare let h: JSXFactory;\r\n/** initialize DOM element with a virtual node and actions object\r\n *\r\n * @param el\r\n * @param view\r\n */\r\nexport declare function init<S extends {}, A extends Actions<S>>(el: HTMLElement, v: LazyVNode, a: A): void;\r\n/** Interface of a parental `Actions` */\r\nexport interface IActionsParent {\r\n    /** renderer that should be called for page re-rendering */\r\n    readonly Renderer: IRenderer;\r\n    /** `redoundo.Hist` object for redo/undo functionality */\r\n    readonly History: Hist;\r\n}\r\n/** Class of hyperoop top-level action */\r\nexport declare class Actions<S extends {}> {\r\n    /** state object */\r\n    readonly State: S;\r\n    /** state object that remember previous states and has redo/undo functionality */\r\n    readonly Remember: S;\r\n    /** renderer that should be called for page re-rendering */\r\n    readonly Renderer: IRenderer;\r\n    /** `redoundo.Hist` object implements redo/undo functionality */\r\n    readonly History: Hist;\r\n    private orig;\r\n    private state;\r\n    private remember;\r\n    private renderer;\r\n    /** Construct an `Actions` object\r\n     *\r\n     * @param start state on start\r\n     * @param hist `redoundo.Hist` object implements redo/undo functionality\r\n     */\r\n    constructor(start: S, hist?: number | Hist);\r\n    /** Partially sets a new state\r\n     *\r\n     * @param s new state data\r\n     * @param remember remember previous state using `redoundo.Hist` or not?\r\n     */\r\n    set(s: Partial<S>, remember?: boolean): void;\r\n    /** Initialize `Actions` with new renderer\r\n     *\r\n     * @param r\r\n     */\r\n    init(r: IRenderer): void;\r\n}\r\n/** Class of hyperoop sub-actions */\r\nexport declare class SubActions<S extends {}> extends Actions<S> {\r\n    /** Constructs `SubActions` object inheriting `History` and `Renderer` from a parent.\r\n     *  NOTE! If `SubActions` object created before first rendering then you will need\r\n     *  to call it\'s `init` manually.\r\n     *\r\n     * @param start state on start\r\n     * @param parent parent `(Sub)Actions` object.\r\n     */\r\n    constructor(start: S, parent: IActionsParent);\r\n}\r\nexport {};\r\n',
-        bindDiagnostics: [],
-        bindSuggestionDiagnostics: undefined,
-        languageVersion: 2,
-        fileName: 'node_modules/hyperoop/dist/hyperoop.d.ts',
-        languageVariant: 0,
-        isDeclarationFile: true,
-        scriptKind: 3,
-        pragmas: Map {},
-        checkJsDirective: undefined,
-        referencedFiles: [],
-        typeReferenceDirectives: [],
-        libReferenceDirectives: [],
-        amdDependencies: [],
-        hasNoDefaultLib: false,
-        statements: [Array],
-        endOfFileToken: [Object],
-        externalModuleIndicator: [Object],
-        nodeCount: 375,
-        identifierCount: 121,
-        identifiers: [Object],
-        parseDiagnostics: [] },
-     kind: 240,
-     jsDoc: [ [Object] ],
-     decorators: undefined,
-     modifiers: [ [Object], [Object], pos: 1895, end: 1954 ],
-     name: 
-      IdentifierObject {
-        pos: 1960,
-        end: 1968,
-        flags: 4194304,
-        parent: [Circular],
-        escapedText: 'Actions' },
-     typeParameters: [ [Object], pos: 1969, end: 1981 ],
-     heritageClauses: undefined,
-     members: 
-      [ [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Circular],
-        [Object],
-        [Object],
-        pos: 1984,
-        end: 2978 ] },
-  kind: 157,
-  jsDoc: 
-   [ NodeObject {
-       pos: 2437,
-       end: 2601,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: [Array],
-       comment: 'Construct an `Actions` object' } ],
-  decorators: undefined,
-  modifiers: undefined,
-  typeParameters: undefined,
-  parameters: 
-   [ NodeObject {
-       pos: 2619,
-       end: 2627,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 151,
-       decorators: undefined,
-       modifiers: undefined,
-       dotDotDotToken: undefined,
-       name: [Object],
-       questionToken: undefined,
-       type: [Object],
-       initializer: undefined },
-     NodeObject {
-       pos: 2628,
-       end: 2649,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 151,
-       decorators: undefined,
-       modifiers: undefined,
-       dotDotDotToken: undefined,
-       name: [Object],
-       questionToken: [Object],
-       type: [Object],
-       initializer: undefined },
-     pos: 2619,
-     end: 2649 ],
-  body: undefined }
->>> NodeObject {
-  pos: 3087,
-  end: 3462,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   NodeObject {
-     pos: 2981,
-     end: 3465,
-     flags: 4194304,
-     transformFlags: undefined,
-     parent: 
-      SourceFileObject {
-        pos: 0,
-        end: 3479,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: undefined,
-        kind: 279,
-        text: 'import * as hyperapp from "hyperapp";\r\nimport Hist from "redoundo";\r\ninterface ISpin {\r\n    Value: boolean;\r\n}\r\n/** Type of renderer that should be called for page re-rendering. */\r\nexport interface IRenderer {\r\n    render: () => (spin: ISpin) => ISpin;\r\n}\r\n/** VDOM representation of an `Element`. */\r\nexport declare type VNode<A = {}> = hyperapp.VNode<A>;\r\n/** Lazy VNode is a function with no argument that returns VNode */\r\nexport declare type LazyVNode<A = {}> = () => VNode<A>;\r\n/** A ImmediateComponent is a function that returns a custom VNode. */\r\nexport declare type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => VNode<A>;\r\n/** A LazyComponent is a function that returns a custom LazyVNode. */\r\nexport declare type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => LazyVNode<A>;\r\n/** A Component can be lazy or immediate. */\r\nexport declare type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;\r\n/** Type of child VDOM elements */\r\nexport declare type Child = VNode | string | number | null;\r\ndeclare type NameType<A> = Component<A> | string;\r\ndeclare type Children = Array<Child | Child[]>;\r\n/** Type of jsx factory function */\r\nexport declare type JSXFactory = <A>(nodeName: NameType<A>, attributes?: A, ...children: Children) => VNode<A>;\r\n/** JSX factory function, creates `VNode`s */\r\nexport declare let h: JSXFactory;\r\n/** initialize DOM element with a virtual node and actions object\r\n *\r\n * @param el\r\n * @param view\r\n */\r\nexport declare function init<S extends {}, A extends Actions<S>>(el: HTMLElement, v: LazyVNode, a: A): void;\r\n/** Interface of a parental `Actions` */\r\nexport interface IActionsParent {\r\n    /** renderer that should be called for page re-rendering */\r\n    readonly Renderer: IRenderer;\r\n    /** `redoundo.Hist` object for redo/undo functionality */\r\n    readonly History: Hist;\r\n}\r\n/** Class of hyperoop top-level action */\r\nexport declare class Actions<S extends {}> {\r\n    /** state object */\r\n    readonly State: S;\r\n    /** state object that remember previous states and has redo/undo functionality */\r\n    readonly Remember: S;\r\n    /** renderer that should be called for page re-rendering */\r\n    readonly Renderer: IRenderer;\r\n    /** `redoundo.Hist` object implements redo/undo functionality */\r\n    readonly History: Hist;\r\n    private orig;\r\n    private state;\r\n    private remember;\r\n    private renderer;\r\n    /** Construct an `Actions` object\r\n     *\r\n     * @param start state on start\r\n     * @param hist `redoundo.Hist` object implements redo/undo functionality\r\n     */\r\n    constructor(start: S, hist?: number | Hist);\r\n    /** Partially sets a new state\r\n     *\r\n     * @param s new state data\r\n     * @param remember remember previous state using `redoundo.Hist` or not?\r\n     */\r\n    set(s: Partial<S>, remember?: boolean): void;\r\n    /** Initialize `Actions` with new renderer\r\n     *\r\n     * @param r\r\n     */\r\n    init(r: IRenderer): void;\r\n}\r\n/** Class of hyperoop sub-actions */\r\nexport declare class SubActions<S extends {}> extends Actions<S> {\r\n    /** Constructs `SubActions` object inheriting `History` and `Renderer` from a parent.\r\n     *  NOTE! If `SubActions` object created before first rendering then you will need\r\n     *  to call it\'s `init` manually.\r\n     *\r\n     * @param start state on start\r\n     * @param parent parent `(Sub)Actions` object.\r\n     */\r\n    constructor(start: S, parent: IActionsParent);\r\n}\r\nexport {};\r\n',
-        bindDiagnostics: [],
-        bindSuggestionDiagnostics: undefined,
-        languageVersion: 2,
-        fileName: 'node_modules/hyperoop/dist/hyperoop.d.ts',
-        languageVariant: 0,
-        isDeclarationFile: true,
-        scriptKind: 3,
-        pragmas: Map {},
-        checkJsDirective: undefined,
-        referencedFiles: [],
-        typeReferenceDirectives: [],
-        libReferenceDirectives: [],
-        amdDependencies: [],
-        hasNoDefaultLib: false,
-        statements: [Array],
-        endOfFileToken: [Object],
-        externalModuleIndicator: [Object],
-        nodeCount: 375,
-        identifierCount: 121,
-        identifiers: [Object],
-        parseDiagnostics: [] },
-     kind: 240,
-     jsDoc: [ [Object] ],
-     decorators: undefined,
-     modifiers: [ [Object], [Object], pos: 2981, end: 3035 ],
-     name: 
-      IdentifierObject {
-        pos: 3041,
-        end: 3052,
-        flags: 4194304,
-        parent: [Circular],
-        escapedText: 'SubActions' },
-     typeParameters: [ [Object], pos: 3053, end: 3065 ],
-     heritageClauses: [ [Object], pos: 3066, end: 3085 ],
-     members: [ [Circular], pos: 3087, end: 3462 ] },
-  kind: 157,
-  jsDoc: 
-   [ NodeObject {
-       pos: 3093,
-       end: 3410,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: [Array],
-       comment: 'Constructs `SubActions` object inheriting `History` and `Renderer` from a parent.\r\nNOTE! If `SubActions` object created before first rendering then you will need\r\nto call it\'s `init` manually.' } ],
-  decorators: undefined,
-  modifiers: undefined,
-  typeParameters: undefined,
-  parameters: 
-   [ NodeObject {
-       pos: 3428,
-       end: 3436,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 151,
-       decorators: undefined,
-       modifiers: undefined,
-       dotDotDotToken: undefined,
-       name: [Object],
-       questionToken: undefined,
-       type: [Object],
-       initializer: undefined },
-     NodeObject {
-       pos: 3437,
-       end: 3460,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 151,
-       decorators: undefined,
-       modifiers: undefined,
-       dotDotDotToken: undefined,
-       name: [Object],
-       questionToken: undefined,
-       type: [Object],
-       initializer: undefined },
-     pos: 3428,
-     end: 3460 ],
-  body: undefined }
->>> NodeObject {
-  pos: 306,
-  end: 571,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   SourceFileObject {
-     pos: 0,
-     end: 573,
-     flags: 4718592,
-     transformFlags: undefined,
-     parent: undefined,
-     kind: 279,
-     text: 'import { IToObject } from "./locutils";\r\n/** Attributes for component `Link` */\r\nexport interface ILinkAttributes {\r\n    /** Where to go? Can be a `string` URL or `IToObject` */\r\n    to: string | IToObject;\r\n    /** Additional event handler for clicking mouse. */\r\n    onclick?: (e: MouseEvent) => void;\r\n}\r\n/** `Link` component that provides application navigation */\r\nexport declare let Link: (a: ILinkAttributes, children: (string | import("hyperapp").VNode<{}>)[]) => import("hyperapp").VNode<{\r\n    href: string;\r\n    onclick(e: MouseEvent): void;\r\n    to: any;\r\n}>;\r\n',
-     bindDiagnostics: [],
-     bindSuggestionDiagnostics: undefined,
-     languageVersion: 2,
-     fileName: 'node_modules/hyperoop-router/dist/link.d.ts',
-     languageVariant: 0,
-     isDeclarationFile: true,
-     scriptKind: 3,
-     pragmas: Map {},
-     checkJsDirective: undefined,
-     referencedFiles: [],
-     typeReferenceDirectives: [],
-     libReferenceDirectives: [],
-     amdDependencies: [],
-     hasNoDefaultLib: false,
-     statements: [ [Object], [Object], [Circular], pos: 0, end: 571 ],
-     endOfFileToken: TokenObject { pos: 571, end: 573, flags: 4194304, parent: [Circular], kind: 1 },
-     externalModuleIndicator: 
-      NodeObject {
-        pos: 0,
-        end: 39,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: [Circular],
-        kind: 249,
-        decorators: undefined,
-        modifiers: undefined,
-        importClause: [Object],
-        moduleSpecifier: [Object],
-        modifierFlagsCache: 536870912 },
-     nodeCount: 70,
-     identifierCount: 18,
-     identifiers: 
-      Map {
-        'IToObject' => 'IToObject',
-        './locutils' => './locutils',
-        'ILinkAttributes' => 'ILinkAttributes',
-        'to' => 'to',
-        'onclick' => 'onclick',
-        'e' => 'e',
-        'MouseEvent' => 'MouseEvent',
-        'Link' => 'Link',
-        'a' => 'a',
-        'children' => 'children',
-        'VNode' => 'VNode',
-        'href' => 'href' },
-     parseDiagnostics: [] },
-  kind: 219,
-  jsDoc: 
-   [ NodeObject {
-       pos: 308,
-       end: 368,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: undefined,
-       comment: '`Link` component that provides application navigation' } ],
-  decorators: undefined,
-  modifiers: 
-   [ TokenObject {
-       pos: 306,
-       end: 376,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 85 },
-     TokenObject {
-       pos: 376,
-       end: 384,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 125 },
-     pos: 306,
-     end: 384 ],
-  declarationList: 
-   NodeObject {
-     pos: 384,
-     end: 570,
-     flags: 4194305,
-     transformFlags: undefined,
-     parent: [Circular],
-     kind: 238,
-     declarations: [ [Object], pos: 388, end: 570 ] } }
->>> NodeObject {
-  pos: 218,
-  end: 361,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   SourceFileObject {
-     pos: 0,
-     end: 363,
-     flags: 4194304,
-     transformFlags: undefined,
-     parent: undefined,
-     kind: 279,
-     text: '/** Attributes of the component `Redirect` */\r\nexport interface IRedirectAttributes {\r\n    /** Current location string, optional */\r\n    from?: string;\r\n    /** String representing a new location */\r\n    to: string;\r\n}\r\n/** `Redirect` component. Rendering it will navigate to a new location */\r\nexport declare const Redirect: (a: IRedirectAttributes) => string;\r\n',
-     bindDiagnostics: [],
-     bindSuggestionDiagnostics: undefined,
-     languageVersion: 2,
-     fileName: 'node_modules/hyperoop-router/dist/redirect.d.ts',
-     languageVariant: 0,
-     isDeclarationFile: true,
-     scriptKind: 3,
-     pragmas: Map {},
-     checkJsDirective: undefined,
-     referencedFiles: [],
-     typeReferenceDirectives: [],
-     libReferenceDirectives: [],
-     amdDependencies: [],
-     hasNoDefaultLib: false,
-     statements: [ [Object], [Circular], pos: 0, end: 361 ],
-     endOfFileToken: TokenObject { pos: 361, end: 363, flags: 4194304, parent: [Circular], kind: 1 },
-     externalModuleIndicator: 
-      NodeObject {
-        pos: 0,
-        end: 218,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: [Circular],
-        kind: 241,
-        jsDoc: [Array],
-        decorators: undefined,
-        modifiers: [Array],
-        name: [Object],
-        typeParameters: undefined,
-        heritageClauses: undefined,
-        members: [Array],
-        modifierFlagsCache: 536870913 },
-     nodeCount: 29,
-     identifierCount: 7,
-     identifiers: 
-      Map {
-        'IRedirectAttributes' => 'IRedirectAttributes',
-        'from' => 'from',
-        'to' => 'to',
-        'Redirect' => 'Redirect',
-        'a' => 'a',
-        'string' => 'string' },
-     parseDiagnostics: [] },
-  kind: 219,
-  jsDoc: 
-   [ NodeObject {
-       pos: 220,
-       end: 293,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: undefined,
-       comment: '`Redirect` component. Rendering it will navigate to a new location' } ],
-  decorators: undefined,
-  modifiers: 
-   [ TokenObject {
-       pos: 218,
-       end: 301,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 85 },
-     TokenObject {
-       pos: 301,
-       end: 309,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 125 },
-     pos: 218,
-     end: 309 ],
-  declarationList: 
-   NodeObject {
-     pos: 309,
-     end: 360,
-     flags: 4194306,
-     transformFlags: undefined,
-     parent: [Circular],
-     kind: 238,
-     declarations: [ [Object], pos: 315, end: 360 ] } }
->>> NodeObject {
-  pos: 910,
-  end: 1067,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   SourceFileObject {
-     pos: 0,
-     end: 1069,
-     flags: 4194304,
-     transformFlags: undefined,
-     parent: undefined,
-     kind: 279,
-     text: 'import { Component, LazyVNode } from "hyperoop";\r\nimport { IMatch } from "./parseRoute";\r\n/** Attributes of target component of `Route` */\r\nexport interface ITargetAttributes {\r\n    /** Match information */\r\n    match: IMatch;\r\n}\r\n/** Type of `Route` target component */\r\nexport declare type TargetComponent = Component<ITargetAttributes>;\r\n/** Type of lazy node that `Route` will render if path correspond to `location.pathname` */\r\nexport declare type TargetNode = LazyVNode<ITargetAttributes>;\r\n/** Attributes for the `Route` component */\r\nexport interface IRouteAttributes {\r\n    /** Path pattern to compare with `location.pathname`, for example `/user/:id` */\r\n    path: string;\r\n    /** When true, the `Route` will only match if the path matches the `location.pathname` exactly. */\r\n    exact: boolean;\r\n    /** A component to render only when the location matches. */\r\n    component: TargetComponent;\r\n}\r\n/** `Route` component renders some UI when a location matches the path */\r\nexport declare let Route: (a: IRouteAttributes) => LazyVNode<ITargetAttributes>;\r\n',
-     bindDiagnostics: [],
-     bindSuggestionDiagnostics: undefined,
-     languageVersion: 2,
-     fileName: 'node_modules/hyperoop-router/dist/route.d.ts',
-     languageVariant: 0,
-     isDeclarationFile: true,
-     scriptKind: 3,
-     pragmas: Map {},
-     checkJsDirective: undefined,
-     referencedFiles: [],
-     typeReferenceDirectives: [],
-     libReferenceDirectives: [],
-     amdDependencies: [],
-     hasNoDefaultLib: false,
-     statements: 
-      [ [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Circular],
-        pos: 0,
-        end: 1067 ],
-     endOfFileToken: 
-      TokenObject {
-        pos: 1067,
-        end: 1069,
-        flags: 4194304,
-        parent: [Circular],
-        kind: 1 },
-     externalModuleIndicator: 
-      NodeObject {
-        pos: 0,
-        end: 48,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: [Circular],
-        kind: 249,
-        decorators: undefined,
-        modifiers: undefined,
-        importClause: [Object],
-        moduleSpecifier: [Object],
-        modifierFlagsCache: 536870912 },
-     nodeCount: 77,
-     identifierCount: 23,
-     identifiers: 
-      Map {
-        'Component' => 'Component',
-        'LazyVNode' => 'LazyVNode',
-        'hyperoop' => 'hyperoop',
-        'IMatch' => 'IMatch',
-        './parseRoute' => './parseRoute',
-        'ITargetAttributes' => 'ITargetAttributes',
-        'match' => 'match',
-        'TargetComponent' => 'TargetComponent',
-        'TargetNode' => 'TargetNode',
-        'IRouteAttributes' => 'IRouteAttributes',
-        'path' => 'path',
-        'exact' => 'exact',
-        'component' => 'component',
-        'Route' => 'Route',
-        'a' => 'a' },
-     parseDiagnostics: [] },
-  kind: 219,
-  jsDoc: 
-   [ NodeObject {
-       pos: 912,
-       end: 985,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: undefined,
-       comment: '`Route` component renders some UI when a location matches the path' } ],
-  decorators: undefined,
-  modifiers: 
-   [ TokenObject {
-       pos: 910,
-       end: 993,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 85 },
-     TokenObject {
-       pos: 993,
-       end: 1001,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 125 },
-     pos: 910,
-     end: 1001 ],
-  declarationList: 
-   NodeObject {
-     pos: 1001,
-     end: 1066,
-     flags: 4194305,
-     transformFlags: undefined,
-     parent: [Circular],
-     kind: 238,
-     declarations: [ [Object], pos: 1005, end: 1066 ] } }
->>> NodeObject {
-  pos: 540,
-  end: 764,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   NodeObject {
-     pos: 382,
-     end: 1050,
-     flags: 4194304,
-     transformFlags: undefined,
-     parent: 
-      SourceFileObject {
-        pos: 0,
-        end: 1052,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: undefined,
-        kind: 279,
-        text: 'import { IRenderer, JSXFactory } from "hyperoop";\r\nimport { IToObject } from "./locutils";\r\n/** Interface of the object that owns a `hyperoop.IRenderer` and can\r\n *  possibly handle location change events.\r\n */\r\nexport interface IRendererOwner {\r\n    readonly onLocationChange?: (data: any) => void;\r\n    readonly Renderer?: IRenderer;\r\n}\r\nexport declare let jsxFactory: JSXFactory;\r\n/** `Router` object that provides routing functionality to a `hyperoop` application */\r\nexport declare class Router {\r\n    private rOwner;\r\n    private loc;\r\n    /** Constructor initializes `Router` with `rOwner` which is usually `hyperoop.Actions`\r\n     *  object and `jsxf` which is usually just `hyperoop.h`.\r\n     */\r\n    constructor(rOwner: IRendererOwner, jsxf: JSXFactory);\r\n    /** Go to a new location. Argument can be a `string` URL or `IToObject` */\r\n    go(t: string | IToObject): void;\r\n    /** Stops a `Router` functionality, useful mainly for tests */\r\n    stop(): void;\r\n    private wrapHistory;\r\n    private unwrapHistory;\r\n    private subscribe;\r\n}\r\n',
-        bindDiagnostics: [],
-        bindSuggestionDiagnostics: undefined,
-        languageVersion: 2,
-        fileName: 'node_modules/hyperoop-router/dist/router.d.ts',
-        languageVariant: 0,
-        isDeclarationFile: true,
-        scriptKind: 3,
-        pragmas: Map {},
-        checkJsDirective: undefined,
-        referencedFiles: [],
-        typeReferenceDirectives: [],
-        libReferenceDirectives: [],
-        amdDependencies: [],
-        hasNoDefaultLib: false,
-        statements: [Array],
-        endOfFileToken: [Object],
-        externalModuleIndicator: [Object],
-        nodeCount: 87,
-        identifierCount: 24,
-        identifiers: [Object],
-        parseDiagnostics: [] },
-     kind: 240,
-     jsDoc: [ [Object] ],
-     decorators: undefined,
-     modifiers: [ [Object], [Object], pos: 382, end: 486 ],
-     name: 
-      IdentifierObject {
-        pos: 492,
-        end: 499,
-        flags: 4194304,
-        parent: [Circular],
-        escapedText: 'Router' },
-     typeParameters: undefined,
-     heritageClauses: undefined,
-     members: 
-      [ [Object],
-        [Object],
-        [Circular],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        [Object],
-        pos: 501,
-        end: 1047 ] },
-  kind: 157,
-  jsDoc: 
-   [ NodeObject {
-       pos: 546,
-       end: 704,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: undefined,
-       comment: 'Constructor initializes `Router` with `rOwner` which is usually `hyperoop.Actions`\r\nobject and `jsxf` which is usually just `hyperoop.h`.' } ],
-  decorators: undefined,
-  modifiers: undefined,
-  typeParameters: undefined,
-  parameters: 
-   [ NodeObject {
-       pos: 722,
-       end: 744,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 151,
-       decorators: undefined,
-       modifiers: undefined,
-       dotDotDotToken: undefined,
-       name: [Object],
-       questionToken: undefined,
-       type: [Object],
-       initializer: undefined },
-     NodeObject {
-       pos: 745,
-       end: 762,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 151,
-       decorators: undefined,
-       modifiers: undefined,
-       dotDotDotToken: undefined,
-       name: [Object],
-       questionToken: undefined,
-       type: [Object],
-       initializer: undefined },
-     pos: 722,
-     end: 762 ],
-  body: undefined }
->>> NodeObject {
-  pos: 37,
-  end: 187,
-  flags: 4194304,
-  transformFlags: undefined,
-  parent: 
-   SourceFileObject {
-     pos: 0,
-     end: 189,
-     flags: 4194304,
-     transformFlags: undefined,
-     parent: undefined,
-     kind: 279,
-     text: 'import { LazyVNode } from "hyperoop";\r\n/** Renders the first child `Route` that matches the location. */\r\nexport declare const Switch: (a: {}, children: LazyVNode<{}>[]) => LazyVNode<{}>;\r\n',
-     bindDiagnostics: [],
-     bindSuggestionDiagnostics: undefined,
-     languageVersion: 2,
-     fileName: 'node_modules/hyperoop-router/dist/switch.d.ts',
-     languageVariant: 0,
-     isDeclarationFile: true,
-     scriptKind: 3,
-     pragmas: Map {},
-     checkJsDirective: undefined,
-     referencedFiles: [],
-     typeReferenceDirectives: [],
-     libReferenceDirectives: [],
-     amdDependencies: [],
-     hasNoDefaultLib: false,
-     statements: [ [Object], [Circular], pos: 0, end: 187 ],
-     endOfFileToken: TokenObject { pos: 187, end: 189, flags: 4194304, parent: [Circular], kind: 1 },
-     externalModuleIndicator: 
-      NodeObject {
-        pos: 0,
-        end: 37,
-        flags: 4194304,
-        transformFlags: undefined,
-        parent: [Circular],
-        kind: 249,
-        decorators: undefined,
-        modifiers: undefined,
-        importClause: [Object],
-        moduleSpecifier: [Object],
-        modifierFlagsCache: 536870912 },
-     nodeCount: 29,
-     identifierCount: 7,
-     identifiers: 
-      Map {
-        'LazyVNode' => 'LazyVNode',
-        'hyperoop' => 'hyperoop',
-        'Switch' => 'Switch',
-        'a' => 'a',
-        'children' => 'children' },
-     parseDiagnostics: [] },
-  kind: 219,
-  jsDoc: 
-   [ NodeObject {
-       pos: 39,
-       end: 104,
-       flags: 4194304,
-       transformFlags: undefined,
-       parent: [Circular],
-       kind: 291,
-       tags: undefined,
-       comment: 'Renders the first child `Route` that matches the location.' } ],
-  decorators: undefined,
-  modifiers: 
-   [ TokenObject { pos: 37, end: 112, flags: 4194304, parent: [Circular], kind: 85 },
-     TokenObject {
-       pos: 112,
-       end: 120,
-       flags: 4194304,
-       parent: [Circular],
-       kind: 125 },
-     pos: 37,
-     end: 120 ],
-  declarationList: 
-   NodeObject {
-     pos: 120,
-     end: 186,
-     flags: 4194306,
-     transformFlags: undefined,
-     parent: [Circular],
-     kind: 238,
-     declarations: [ [Object], pos: 126, end: 186 ] } }
+### IRenderer
+
+>>> type VNode<A = {}> = hyperapp.VNode<A>;
+### VNode
+
+>>> type LazyVNode<A = {}> = () => VNode<A>;
+### LazyVNode
+
+>>> type ImmediateComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => VNode<A>;
+### ImmediateComponent
+
+>>> type LazyComponent<A = {}> = (attributes: A, children: Array<VNode | string>) => LazyVNode<A>;
+### LazyComponent
+
+>>> type Component<A = {}> = LazyComponent<A> | ImmediateComponent<A>;
+### Component
+
+>>> type Child = VNode | string | number | null;
+### Child
+
+>>> type JSXFactory = <A>(nodeName: NameType<A>, attributes?: A, ...children: Children) => VNode<A>;
+### JSXFactory
+
+>>> let h: JSXFactory;
+### h
+
+>>> function init<S extends {}, A extends Actions<S>>(el: HTMLElement, v: LazyVNode, a: A): void;
+### init
+### IActionsParent
+
+>>> readonly Renderer: IRenderer;
+### Renderer
+
+>>> readonly History: Hist;
+### History
+### Actions
+
+>>> readonly State: S;
+### State
+
+>>> readonly Remember: S;
+### Remember
+
+>>> readonly Renderer: IRenderer;
+### Renderer
+
+>>> readonly History: Hist;
+### History
+
+>>> constructor(start: S, hist?: number | Hist);
+### undefined
+
+>>> set(s: Partial<S>, remember?: boolean): void;
+### set
+
+>>> init(r: IRenderer): void;
+### init
+### SubActions
+
+>>> constructor(start: S, parent: IActionsParent);
+### undefined
+### ILinkAttributes
+
+>>> to: string | IToObject;
+### to
+
+>>> onclick?: (e: MouseEvent) => void;
+### onclick
+
+>>> const Link: (a: ILinkAttributes, children: (string | import("hyperapp").VNode<{}>)[]) => import("hyperapp").VNode<{
+    href: string;
+    onclick(e: MouseEvent): void;
+    to: any;
+}>;
+### Link
+### IToObject
+
+>>> pathname?: string;
+### pathname
+
+>>> search?: string;
+### search
+
+>>> hash?: string;
+### hash
+
+>>> state: any;
+### state
+### IMatch
+
+>>> isExact: boolean;
+### isExact
+
+>>> path: string;
+### path
+
+>>> url: string;
+### url
+
+>>> params?: {
+        [K in string]: string;
+    };
+### params
+### IRedirectAttributes
+
+>>> from?: string;
+### from
+
+>>> to: string;
+### to
+
+>>> const Redirect: (a: IRedirectAttributes) => string;
+### Redirect
+### ITargetAttributes
+
+>>> match: IMatch;
+### match
+
+>>> type TargetComponent = Component<ITargetAttributes>;
+### TargetComponent
+
+>>> type TargetNode = LazyVNode<ITargetAttributes>;
+### TargetNode
+### IRouteAttributes
+
+>>> path: string;
+### path
+
+>>> exact: boolean;
+### exact
+
+>>> component: TargetComponent;
+### component
+
+>>> const Route: (a: IRouteAttributes) => LazyVNode<ITargetAttributes>;
+### Route
+### IRendererOwner
+### Router
+
+>>> constructor(rOwner: IRendererOwner, jsxf: JSXFactory);
+### undefined
+
+>>> go(t: string | IToObject): void;
+### go
+
+>>> stop(): void;
+### stop
+
+>>> const Switch: (a: {}, children: LazyVNode<{}>[]) => LazyVNode<{}>;
+### Switch

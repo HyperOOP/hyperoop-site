@@ -65,7 +65,7 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
 
         if (complexNode(n)) {
             const d = decl.slice(n.comment.length).trim();
-            const m = /^(export\s+declare|export)?(.*)\{\s*\n/.exec(d);
+            const m = /^(export\s+declare|export)?(.*)\{\s*\n/gms.exec(d);
             if (m) {
                 n.decl = m[2].trim();
             } else {
@@ -73,11 +73,19 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
             }
         } else {
             const d = decl.slice(n.comment.length).trim();
-            const m = /^(export\s+declare|export)?(.*)$/.exec(d);
+            const m = /^(export\s+declare|export)?(.*)/gms.exec(d);
             if (m) {
                 n.decl = m[2].trim();
             } else {
                 n.decl = decl;
+            }
+        }
+
+        if (!n.name) {
+            const m = /^(const|let|function)\s+([a-zA-Z_][a-zA-Z0-9_]*)/gms.exec(n.decl);
+            if (m) {
+                n.name = m[2].trim();
+                n.keyword = m[1].trim();
             }
         }
 
