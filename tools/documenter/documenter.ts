@@ -129,7 +129,12 @@ class Documenter {
             await this.genFileDoc(modName, fpath, tree);
         }
 
-        const code = `module.exports = ${JSON.stringify(tree, null, 2)}`;
+        const funcName = misc.makeAPIReferenceGetterName(modName);
+        const code =
+`module.exports = function ${funcName}() {
+  return ${JSON.stringify(tree, null, 2)};
+}
+`;
 
         await writeFile(path.join(outDir, misc.makeAPIReferenceGetterName(modName) + ".js"),
             code, {flag: "w", encoding: "utf8"});
