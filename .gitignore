@@ -3,4 +3,5 @@ package-lock.json
 **/dist/*
 /static/css/*
 /static/js/*
+/static/data/*
 **/log.txt

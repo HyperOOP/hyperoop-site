@@ -1,5 +1,6 @@
 import * as ui from "hyperoop";
 import { Link } from "hyperoop-router";
+import * as misc from "../misc";
 
 export interface INavbarDropdownLiArgs {
     title: string;
@@ -69,7 +70,7 @@ export const Navbar = (a: INavbarArgs) => (
                     onSearch={a.onSearch}
                     searchValue={a.searchValue}
                 />
-                { a.hasTutorial ? <NavbarLi title="Tutorial" hash="#tutorial"/> : "" }
+                { a.hasTutorial ? <NavbarLi title="Tutorial" hash={misc.tutorialAddr}/> : "" }
                 {
                     a.reference.length ?
                         <NavbarDropdownLi title="API Reference">
@@ -90,7 +91,7 @@ export const Navbar = (a: INavbarArgs) => (
                         </NavbarDropdownLi> :
                         ""
                 }
-                { a.hasDonatePage ? <NavbarLi title="Donate" hash="#donate"/> : "" }
+                { a.hasDonatePage ? <NavbarLi title="Donate" hash={misc.donateAddr}/> : "" }
             </ul>
         </div>
     </nav>
