@@ -126,8 +126,10 @@ class Documenter {
 
         const funcName = misc.makeAPIReferenceGetterName(modName);
         const code =
-`module.exports = function ${funcName}() {
-  return ${JSON.stringify(tree, null, 2)};
+`
+var data = ${JSON.stringify(tree, null, 2)};
+export default function ${funcName}() {
+  return data;
 }
 `;
 

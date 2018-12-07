@@ -5,3 +5,4 @@ package-lock.json
 /static/js/*
 /static/data/*
 **/log.txt
+/.rpt2_cache/*

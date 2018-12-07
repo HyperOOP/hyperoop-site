@@ -22,15 +22,15 @@ function parseHRoute(hashPattern: string, hashMatch: string, exact: boolean): IH
         return { isExact: hashPattern === hashMatch, hashPattern, hashMatch };
     }
 
-    const parts = hashPattern.split("-");
-    const mparts = hashMatch.split("-");
+    const parts = hashPattern.slice(1).split("-");
+    const mparts = hashMatch.slice(1).split("-");
 
     if (parts.length > mparts.length || (exact && parts.length < mparts.length)) {
         return null;
     }
 
     const result: IHashMatch = {
-        hashMatch: "",
+        hashMatch: "#",
         hashPattern,
         isExact: false,
         params: {},
@@ -45,7 +45,7 @@ function parseHRoute(hashPattern: string, hashMatch: string, exact: boolean): IH
         } else if (p !== u) {
             return null;
         }
-        result.hashMatch += u + "/";
+        result.hashMatch += u + "-";
     }
 
     return result;
@@ -66,7 +66,7 @@ export interface IHRouteAttributes {
 
 export const HRoute = (a: IHRouteAttributes): HTargetNode => () => {
     const loc = window.location;
-    const match = parseHRoute(a.hash, loc.pathname, a.exact);
+    const match = parseHRoute(a.hash, loc.hash, a.exact);
     if (!match) { return null; }
     const c = a.component({match}, []);
     if (typeof c === "function") { return c(); }

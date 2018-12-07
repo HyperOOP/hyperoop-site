@@ -49,20 +49,22 @@ export const NavbarSearchLi = (a: INavbarSearchLiArgs) => (
     </li>
 );
 
-export interface INavbarArgs extends INavbarSearchLiArgs {
-    hasTutorial:   boolean;
-    hasDonatePage: boolean;
-    reference:     INavbarLiArgs[];
-    examples:      INavbarLiArgs[];
+export interface INavbarArgs {
+    searchArgs:       INavbarSearchLiArgs;
+    hasTutorial:      boolean;
+    hasDonationsPage: boolean;
+    reference:        INavbarLiArgs[];
+    examples:         INavbarLiArgs[];
 }
 
 const NavbarMenuUl = (a: INavbarArgs) => (
     <ul class="uk-navbar-nav">
-        <NavbarSearchLi
-            onSearchInput={a.onSearchInput}
-            onSearch={a.onSearch}
-            searchValue={a.searchValue}
-        />
+        { a.searchArgs ?
+            <NavbarSearchLi
+                onSearchInput={a.searchArgs.onSearchInput}
+                onSearch={a.searchArgs.onSearch}
+                searchValue={a.searchArgs.searchValue}
+            /> : ""}
         { a.hasTutorial ? <NavbarLi title="Tutorial" hash={misc.tutorialAddr}/> : "" }
         { a.reference.length ?
                 <NavbarDropdownLi title="API Reference">
@@ -76,7 +78,7 @@ const NavbarMenuUl = (a: INavbarArgs) => (
                             <NavbarLi title={title} hash={hash}/>) }
                 </NavbarDropdownLi> :
                 "" }
-        { a.hasDonatePage ? <NavbarLi title="Donate" hash={misc.donateAddr}/> : "" }
+        { a.hasDonationsPage ? <NavbarLi title="Donate" hash={misc.donateAddr}/> : "" }
     </ul>
 );
 
@@ -84,7 +86,7 @@ export const Navbar = (a: INavbarArgs) => (
     <div uk-sticky="media: 960" class="uk-container uk-container-expand ho-navbar">
     <nav uk-navbar class="uk-navbar-container">
         <div class="uk-navbar-left">
-            <img src="../static/img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image"/>
+            <img src="static/img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image"/>
             <span class="ho-logo-text">HyperOOP</span>
         </div>
         <div class="uk-navbar-right uk-visible@m">
