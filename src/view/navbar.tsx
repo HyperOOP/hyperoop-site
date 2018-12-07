@@ -56,6 +56,30 @@ export interface INavbarArgs extends INavbarSearchLiArgs {
     examples:      INavbarLiArgs[];
 }
 
+const NavbarMenuUl = (a: INavbarArgs) => (
+    <ul class="uk-navbar-nav">
+        <NavbarSearchLi
+            onSearchInput={a.onSearchInput}
+            onSearch={a.onSearch}
+            searchValue={a.searchValue}
+        />
+        { a.hasTutorial ? <NavbarLi title="Tutorial" hash={misc.tutorialAddr}/> : "" }
+        { a.reference.length ?
+                <NavbarDropdownLi title="API Reference">
+                    { a.reference.map(({title, hash}) =>
+                            <NavbarLi title={title} hash={hash}/>) }
+                </NavbarDropdownLi> :
+                "" }
+        { a.examples.length ?
+                <NavbarDropdownLi title="Examples">
+                    { a.examples.map(({title, hash}) =>
+                            <NavbarLi title={title} hash={hash}/>) }
+                </NavbarDropdownLi> :
+                "" }
+        { a.hasDonatePage ? <NavbarLi title="Donate" hash={misc.donateAddr}/> : "" }
+    </ul>
+);
+
 export const Navbar = (a: INavbarArgs) => (
     <div uk-sticky="media: 960" class="uk-container uk-container-expand ho-navbar">
     <nav uk-navbar class="uk-navbar-container">
@@ -64,35 +88,7 @@ export const Navbar = (a: INavbarArgs) => (
             <span class="ho-logo-text">HyperOOP</span>
         </div>
         <div class="uk-navbar-right uk-visible@m">
-            <ul class="uk-navbar-nav">
-                <NavbarSearchLi
-                    onSearchInput={a.onSearchInput}
-                    onSearch={a.onSearch}
-                    searchValue={a.searchValue}
-                />
-                { a.hasTutorial ? <NavbarLi title="Tutorial" hash={misc.tutorialAddr}/> : "" }
-                {
-                    a.reference.length ?
-                        <NavbarDropdownLi title="API Reference">
-                            {
-                                a.reference.map(({title, hash}) =>
-                                    <NavbarLi title={title} hash={hash}/>)
-                            }
-                        </NavbarDropdownLi> :
-                        ""
-                }
-                {
-                    a.examples.length ?
-                        <NavbarDropdownLi title="Examples">
-                            {
-                                a.examples.map(({title, hash}) =>
-                                    <NavbarLi title={title} hash={hash}/>)
-                            }
-                        </NavbarDropdownLi> :
-                        ""
-                }
-                { a.hasDonatePage ? <NavbarLi title="Donate" hash={misc.donateAddr}/> : "" }
-            </ul>
+            <NavbarMenuUl {...a}/>
         </div>
     </nav>
     </div>

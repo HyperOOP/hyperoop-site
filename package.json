@@ -50,7 +50,7 @@
     "uikit": "^3.0.0-rc.25"
   },
   "dependencies": {
-    "hyperoop": "^0.2.6",
+    "hyperoop": "^0.2.7",
     "hyperoop-router": "^0.1.9",
     "toml": "^2.3.3"
   }

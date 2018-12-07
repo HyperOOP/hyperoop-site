@@ -8,9 +8,13 @@
       "jsxFactory": "ui.h",
       "moduleResolution": "node",
       "esModuleInterop": true,
+      "outDir": "static/js",
       "lib": [
           "es6",
           "dom"
       ]
     },
+
+    "include": ["src/**/*"],
+    "exclude": ["src/less/**/*"]
 }
