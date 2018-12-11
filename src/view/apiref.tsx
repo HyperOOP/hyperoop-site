@@ -3,7 +3,7 @@ import * as misc from "../misc";
 import { ITOC } from "../model/apiref";
 import { SiteInfo } from "../model/site";
 import { IHTargetAttributes } from "../utils/hroute";
-import { INavbarLiArgs, Navbar} from "./navbar";
+import { INavbarLiArgs } from "./navbar";
 import { ISidebarSectionInfo, SideBar } from "./sidebar";
 
 export function makeNavbarReferenceArgs(): INavbarLiArgs[] {
@@ -34,23 +34,6 @@ function makeSidebarSections(modName: string): ISidebarSectionInfo[] {
     }
     return result;
 }
-
-export const APIRefPage = (a: IHTargetAttributes) => () => (
-    <div key="APIRef">
-    <Navbar
-        hasTutorial={false}
-        hasDonationsPage={false}
-        examples={[]}
-        reference={makeNavbarReferenceArgs()}
-        searchArgs = {null}
-    />
-    <SideBar
-        title = { "module" in a.match.params ? `${a.match.params.module} API` : null }
-        sections = { "module" in a.match.params ? makeSidebarSections(a.match.params.module) : null }
-    />
-    { /* TODO: content */}
-    </div>
-);
 
 export const APIRefSidebar = (a: IHTargetAttributes) => () => (
     <SideBar

@@ -81,17 +81,3 @@ export const NavbarMenuUl = (a: INavbarArgs) => (
         { a.hasDonationsPage ? <NavbarLi title="Donate" hash={misc.donateAddr}/> : "" }
     </ul>
 );
-
-export const Navbar = (a: INavbarArgs) => (
-    <div key="Navbar" uk-sticky="media: 960" class="uk-container uk-container-expand ho-navbar">
-    <nav uk-navbar class="uk-navbar-container">
-        <div class="uk-navbar-left">
-            <img src="static/img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image"/>
-            <span class="ho-logo-text">HyperOOP</span>
-        </div>
-        <div class="uk-navbar-right uk-visible@m">
-            <NavbarMenuUl {...a}/>
-        </div>
-    </nav>
-    </div>
-);

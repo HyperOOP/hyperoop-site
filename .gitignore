@@ -1,8 +1,9 @@
 **/node_modules/**
 package-lock.json
 **/dist/*
-/static/css/*
-/static/js/*
-/static/data/*
+/site/static/css/*
+/site/static/js/*
+/site/static/data/*
 **/log.txt
 /.rpt2_cache/*
+/bin/*
