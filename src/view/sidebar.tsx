@@ -39,9 +39,9 @@ const makeSection = (info: ISidebarSectionInfo): ui.VNode[] => {
 };
 
 export const SideBar = (a: ISidebarDivArgs) => (
-    <div class="ho-sidebar-left uk-visible@m">
-        <h4 class="ho-h4">{a.title}</h4>
-        <ul class="uk-nav uk-nav-default">
+    <div key="Sidebar" class="ho-sidebar-left uk-visible@m">
+        <h4 class="ho-h4" key="SidebarTitle">{a.title}</h4>
+        <ul class="uk-nav uk-nav-default" key="SidebarUl">
             {a.sections.map((info) => makeSection(info)) }
         </ul>
     </div>

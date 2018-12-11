@@ -10,8 +10,10 @@
     "build:documenter": "rimraf tools/dist && tsc -p tools/documenter/tsconfig.json",
     "build:apidocs": "npm run build:documenter && node tools/dist/tools/documenter/documenter.js apidocs.toml",
     "build:index": "rollup -c -i src/index.tsx -o static/js/index.js -m -f umd",
+    "build:index:tsc": "tsc -p tsconfig.cmj.json",
     "build:hyperoop:apidoc": "rollup -c rollup.config.data.js -i static/data/getHyperOOPAPIReference.js -o static/js/getHyperOOPAPIReference.js -m -f umd -n getHyperOOPAPIReference",
     "build:router:apidoc": "rollup -c rollup.config.data.js -i static/data/getRouterAPIReference.js -o static/js/getRouterAPIReference.js -m -f umd -n getRouterAPIReference",
+    "build": "npm run build:css && npm run build:apidocs && npm run build:hyperoop:apidoc && npm run build:router:apidoc && npm run build:index",
     "clean:apidocs": "rimraf static/data",
     "lint:tools": "tslint -c tslint.json 'tools/**/*.ts'",
     "lint:src": "tslint -c tslint.json 'src/**/*.ts'",
@@ -57,8 +59,8 @@
     "uikit": "^3.0.0-rc.25"
   },
   "dependencies": {
-    "hyperoop": "^0.2.7",
-    "hyperoop-router": "^0.1.9",
+    "hyperoop": "^0.3.4",
+    "hyperoop-router": "^0.1.15",
     "toml": "^2.3.3"
   }
 }

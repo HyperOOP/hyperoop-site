@@ -6,7 +6,7 @@ import { IHTargetAttributes } from "../utils/hroute";
 import { INavbarLiArgs, Navbar} from "./navbar";
 import { ISidebarSectionInfo, SideBar } from "./sidebar";
 
-function makeNavbarReferenceArgs(): INavbarLiArgs[] {
+export function makeNavbarReferenceArgs(): INavbarLiArgs[] {
     const result: INavbarLiArgs[] = [];
     for (const modName in SiteInfo.apiReference) {
         result.push({title: modName, hash: misc.makeAPIReferenceHash(modName)});
@@ -35,8 +35,8 @@ function makeSidebarSections(modName: string): ISidebarSectionInfo[] {
     return result;
 }
 
-export const APIRefPage = (a: IHTargetAttributes): ui.VNode<IHTargetAttributes> => (
-    <div>
+export const APIRefPage = (a: IHTargetAttributes) => () => (
+    <div key="APIRef">
     <Navbar
         hasTutorial={false}
         hasDonationsPage={false}
@@ -50,4 +50,11 @@ export const APIRefPage = (a: IHTargetAttributes): ui.VNode<IHTargetAttributes> 
     />
     { /* TODO: content */}
     </div>
+);
+
+export const APIRefSidebar = (a: IHTargetAttributes) => () => (
+    <SideBar
+        title = { "module" in a.match.params ? `${a.match.params.module} API` : null }
+        sections = { "module" in a.match.params ? makeSidebarSections(a.match.params.module) : null }
+    />
 );

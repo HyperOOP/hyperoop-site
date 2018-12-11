@@ -9,14 +9,29 @@
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="static/css/style.css" />
 
-    <!-- UIkit JS -->
+    <!-- UIkit JS  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit-icons.min.js"></script>
+ 
 
     <!-- Google Font Comfortaa -->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet"> 
 </head>
 <body>
+    <div uk-sticky="media: 960" class="uk-container uk-container-expand ho-navbar">
+    <nav uk-navbar class="uk-navbar-container">
+        <div class="uk-navbar-left">
+            <img src="static/img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image">
+            <span class="ho-logo-text">HyperOOP</span>
+        </div>
+        <div class="uk-navbar-right uk-visible@m" id="navbarPlace">
+        </div>
+    </nav>
+    </div>
+
+    <div id="sidebarPlace">
+    </div>
+       
     <script src="static/js/getHyperOOPAPIReference.js"></script>
     <script src="static/js/getRouterAPIReference.js"></script>
     <script src="static/js/index.js"></script>

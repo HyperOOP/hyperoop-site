@@ -6,7 +6,7 @@ export interface INavbarDropdownLiArgs {
     title: string;
 }
 
-export const NavbarDropdownLi = (a: INavbarDropdownLiArgs, children: ui.Child[]) => (
+export const NavbarDropdownLi = (a: INavbarDropdownLiArgs, children) => (
     <li>
         <a href="#">{a.title}</a>
         <div class="uk-navbar-dropdown">
@@ -57,7 +57,7 @@ export interface INavbarArgs {
     examples:         INavbarLiArgs[];
 }
 
-const NavbarMenuUl = (a: INavbarArgs) => (
+export const NavbarMenuUl = (a: INavbarArgs) => (
     <ul class="uk-navbar-nav">
         { a.searchArgs ?
             <NavbarSearchLi
@@ -83,7 +83,7 @@ const NavbarMenuUl = (a: INavbarArgs) => (
 );
 
 export const Navbar = (a: INavbarArgs) => (
-    <div uk-sticky="media: 960" class="uk-container uk-container-expand ho-navbar">
+    <div key="Navbar" uk-sticky="media: 960" class="uk-container uk-container-expand ho-navbar">
     <nav uk-navbar class="uk-navbar-container">
         <div class="uk-navbar-left">
             <img src="static/img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image"/>

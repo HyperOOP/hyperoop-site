@@ -1,4 +1,4 @@
-import { Component, LazyVNode } from "hyperoop";
+import * as ui from "hyperoop";
 
 export interface IHashMatch {
     isExact:     boolean;
@@ -55,8 +55,7 @@ export interface IHTargetAttributes {
     match: IHashMatch;
 }
 
-export type HTargetComponent = Component<IHTargetAttributes>;
-export type HTargetNode = LazyVNode<IHTargetAttributes>;
+export type HTargetComponent = ui.Component<IHTargetAttributes>;
 
 export interface IHRouteAttributes {
     hash:      string;
@@ -64,11 +63,13 @@ export interface IHRouteAttributes {
     component: HTargetComponent;
 }
 
-export const HRoute = (a: IHRouteAttributes): HTargetNode => () => {
+export const HRoute: ui.Component<IHRouteAttributes> = (a: IHRouteAttributes) => () => {
     const loc = window.location;
     const match = parseHRoute(a.hash, loc.hash, a.exact);
     if (!match) { return null; }
     const c = a.component({match}, []);
-    if (typeof c === "function") { return c(); }
+    if (typeof c === "function") {
+        const x = c();
+        return c(); }
     return c;
 };
