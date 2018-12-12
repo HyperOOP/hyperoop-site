@@ -2,6 +2,7 @@ import * as ui from "hyperoop";
 import { Router } from "hyperoop-router";
 import { getAPIReference, getTOC, IReferenceTree, ITOC } from "../model/apiref";
 import * as misc from "../utils/misc";
+import { IAPIRefContentSectionInfo } from "../view/apiref";
 import { ISidebarSectionInfo } from "../view/sidebar";
 
 interface IModuleRefData {
@@ -65,13 +66,89 @@ export class APIRefController {
     }
 }
 
-export class APIRefContentController extends ui.Actions<IReferenceTree> {
+type ContentItemKind =
+| "Constant"
+| "Variable"
+| "Type"
+| "Interface"
+| "Function"
+| "Class"
+| "Property"
+| "Constructor"
+| "Method";
+
+function getKind(ch: IReferenceTree): ContentItemKind {
+    switch (ch.kind) {
+        case "VariableStatement":
+            if (ch.keyword && ch.keyword === "const") {
+                return "Constant";
+            } else {
+                return "Variable";
+            }
+        case "InterfaceDeclaration":
+            return "Interface";
+        case "TypeAliasDeclaration":
+            return "Type";
+        case "ClassDeclaration":
+            return "Class";
+        case "Constructor":
+            return "Constructor";
+        case "FunctionDeclaration":
+            return "Function";
+        case "MethodDeclaration":
+            return "Method";
+        case "PropertySignature":
+        case "PropertyDeclaration":
+            return "Property";
+        default:
+            throw new Error(`Mom, what is it ${ch.kind}?`);
+        }
+}
+
+function makeAPIRefContentSections(
+    tree: IReferenceTree,
+    s: IAPIRefContentSectionInfo[] = [],
+    prefix: string = null): IAPIRefContentSectionInfo[] {
+
+    for (const ch of tree.children) {
+        const kind = getKind(ch);
+        let name = kind === "Constructor" ? "" : ch.name;
+        if (prefix) { name = `${prefix}.${name}`}
+        s.push({
+            comment: ch.commentText,
+            decl: ch.decl,
+            kind,
+            name,
+        });
+
+        if (ch.children && ch.children.length) {
+            makeAPIRefContentSections(ch, s, name);
+        }
+    }
+    return s;
+}
+
+interface IAPIRefContentData {
+    modName: string;
+    tree: IReferenceTree;
+    sections: IAPIRefContentSectionInfo[];
+}
+
+export class APIRefContentController extends ui.Actions<IAPIRefContentData> {
     constructor() {
-        super({} as IReferenceTree);
+        super({
+            modName: "",
+            sections: [],
+            tree: {} as IReferenceTree,
+        });
     }
 
     public async setTree(modname: string, tree: IReferenceTree) {
-        this.set({...tree});
+        this.set({
+            modName: modname,
+            sections: makeAPIRefContentSections(tree),
+            tree,
+        });
     }
 }
 

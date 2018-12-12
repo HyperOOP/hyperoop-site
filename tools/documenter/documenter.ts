@@ -46,6 +46,11 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
             const match = cmtRe.exec(decl);
             if (!match) { return; }
             n.comment = match[0];
+            n.commentText = match[1]
+                .split(/\n\s*\*/)
+                .filter((s) => !/^\s*\@/.test(s))
+                .join("\n")
+                .trim();
         } else {
             return;
         }
