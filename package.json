@@ -6,6 +6,7 @@
   "main": "dist/index.html",
   "scripts": {
     "watch:css": "npm-watch build:css",
+    "watch:index": "npm-watch build:index",
     "build:css": "lessc --rewrite-urls=all src/less/style.less site/static/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
     "build:documenter": "rimraf tools/dist && tsc -p tools/documenter/tsconfig.json",
     "build:apidocs": "npm run build:documenter && node bin/documenter.js apidocs.toml",
@@ -25,6 +26,12 @@
         "src/less"
       ],
       "extensions": "less"
+    },
+    "build:index": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts,tsx"
     }
   },
   "repository": {

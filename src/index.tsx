@@ -12,6 +12,7 @@ async function main() {
     const navbarController = new NavbarController(["HyperOOP", "Router"]);
 
     apirefController.Router.go("./#apiref-HyperOOP");
+    if (apirefController.Fresh) { await apirefController.onLocationChange(null); }
 
     const navbarView = () => (
         <NavbarMenuUl

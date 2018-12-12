@@ -23,6 +23,7 @@ export class APIRefController {
     public readonly TreeCtrl: APIRefContentController;
 
     private ready: APIRefData = {};
+    private fresh: boolean = true;
 
     constructor(private mainCtrl: IMainController) {
         this.Router = new Router(this, ui.h);
@@ -30,7 +31,10 @@ export class APIRefController {
         this.TreeCtrl = new APIRefContentController();
     }
 
+    get Fresh() { return this.fresh; }
+
     public async onLocationChange(data: any) {
+        this.fresh = false;
         const loc = window.location;
         const hashRe = /\#apiref\-([a-zA-Z_][a-zA-Z0-9_]*)(\-.*)?/;
         const m = loc.hash.match(hashRe);
