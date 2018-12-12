@@ -1,6 +1,6 @@
 import * as ui from "hyperoop";
 import { Link } from "hyperoop-router";
-import * as misc from "../misc";
+import * as misc from "../utils/misc";
 
 export interface INavbarDropdownLiArgs {
     title: string;

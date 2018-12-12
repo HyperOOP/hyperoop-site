@@ -4,7 +4,6 @@ import util from "util";
 
 import { parse as parseTOML } from "toml";
 import * as ts from "typescript";
-import * as misc from "../../src/misc";
 import ITree from "./tree";
 
 interface IModuleConf {
@@ -124,17 +123,8 @@ class Documenter {
             await this.genFileDoc(modName, fpath, tree);
         }
 
-        const funcName = misc.makeAPIReferenceGetterName(modName);
-        const code =
-`
-var data = ${JSON.stringify(tree, null, 2)};
-export default function ${funcName}() {
-  return data;
-}
-`;
-
-        await writeFile(path.join(outDir, misc.makeAPIReferenceGetterName(modName) + ".js"),
-            code, {flag: "w", encoding: "utf8"});
+        await writeFile(path.join(outDir, modName + "_ref.json"),
+        JSON.stringify(tree, null, 2), {flag: "w", encoding: "utf8"});
     }
 
     private async genFileDoc(modName: string, filePath: string, tree: ITree) {

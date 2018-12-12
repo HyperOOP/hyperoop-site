@@ -1,5 +1,5 @@
 
-export const makeAPIReferenceGetterName = (moduleName: string) => `get${moduleName}APIReference`;
+export const makeAPIReferenceFileName = (moduleName: string) => `${moduleName}_ref.json`;
 export const tutorialAddr = "#tutorial";
 export const donateAddr = "#donate";
 export const makeAPIReferenceHash = (modName: string) => `#apiref-${modName}`;

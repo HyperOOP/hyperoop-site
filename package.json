@@ -8,16 +8,16 @@
     "watch:css": "npm-watch build:css",
     "build:css": "lessc --rewrite-urls=all src/less/style.less site/static/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
     "build:documenter": "rimraf tools/dist && tsc -p tools/documenter/tsconfig.json",
-    "build:apidocs": "npm run build:documenter && node bin/tools/documenter/documenter.js apidocs.toml",
+    "build:apidocs": "npm run build:documenter && node bin/documenter.js apidocs.toml",
     "build:index": "rollup -c -i src/index.tsx -o site/static/js/index.js -m -f umd",
     "build:index:tsc": "tsc -p tsconfig.cmj.json",
-    "build:hyperoop:apidoc": "rollup -c rollup.config.data.js -i site/static/data/getHyperOOPAPIReference.js -o site/static/js/getHyperOOPAPIReference.js -m -f umd -n getHyperOOPAPIReference",
-    "build:router:apidoc": "rollup -c rollup.config.data.js -i site/static/data/getRouterAPIReference.js -o site/static/js/getRouterAPIReference.js -m -f umd -n getRouterAPIReference",
-    "build": "npm run build:css && npm run build:apidocs && npm run build:hyperoop:apidoc && npm run build:router:apidoc && npm run build:index",
+    "build": "npm run build:css && npm run build:apidocs && npm run build:index",
     "clean:apidocs": "rimraf site/static/data",
+    "clean:bin": "rimraf bin",
     "lint:tools": "tslint -c tslint.json 'tools/**/*.ts'",
     "lint:src": "tslint -c tslint.json 'src/**/*.ts'",
-    "lint": "npm run lint:tools && npm run lint:src"
+    "lint": "npm run lint:tools && npm run lint:src",
+    "serve": "http-server site"
   },
   "watch": {
     "build:css": {
@@ -46,6 +46,7 @@
   "homepage": "https://github.com/algebraic-brain/hyperoop-site#readme",
   "devDependencies": {
     "@types/node": "^10.12.12",
+    "http-server": "^0.11.1",
     "less": "^3.9.0",
     "less-plugin-clean-css": "^1.5.1",
     "npm-watch": "^0.5.0",

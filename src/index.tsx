@@ -1,27 +1,37 @@
 import * as ui from "hyperoop";
-import { Main } from "./controller/main";
+import { APIRefController } from "./controller/apiref";
+import { MainController} from "./controller/main";
+import { NavbarController } from "./controller/navbar";
 import { HRoute } from "./utils/hroute";
-import { APIRefSidebar, makeNavbarReferenceArgs } from "./view/apiref";
+import { APIRefSidebar } from "./view/apiref";
 import { NavbarMenuUl } from "./view/navbar";
 
-const view1 = () => (
-    <NavbarMenuUl
-        hasTutorial={false}
-        hasDonationsPage={false}
-        examples={[]}
-        reference={makeNavbarReferenceArgs()}
-        searchArgs = {null}
-    />
-);
+async function main() {
+    const mainController = new MainController();
+    const apirefController = new APIRefController(mainController);
+    const navbarController = new NavbarController(["HyperOOP", "Router"]);
 
-const view2 = () => (
-    <HRoute exact={true} hash="#apiref-:module" component={APIRefSidebar}/>
-);
+    apirefController.Router.go("./#apiref-HyperOOP");
 
-const navbar = new Main();
-const sidebar = new Main();
+    const navbarView = () => (
+        <NavbarMenuUl
+            hasTutorial={false}
+            hasDonationsPage={false}
+            examples={[]}
+            reference={navbarController.State.apirefData}
+            searchArgs = {null}
+        />
+    );
 
-navbar.Router.go({hash: "#apiref-HyperOOP", state: null});
+    const apiSidebarView = () => (
+        <HRoute
+            exact = {false}
+            hash = "#apiref-:module"
+            component = {APIRefSidebar(apirefController.TOCCtrl.State.sections)}/>
+    );
 
-ui.init(document.getElementById("navbarPlace"), view1, navbar);
-ui.init(document.getElementById("sidebarPlace"), view2, sidebar);
+    ui.init(document.getElementById("navbarPlace"), navbarView, navbarController);
+    ui.init(document.getElementById("sidebarPlace"), apiSidebarView, apirefController.TOCCtrl);
+}
+
+main();

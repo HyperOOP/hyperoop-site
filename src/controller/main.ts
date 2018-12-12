@@ -1,10 +1,11 @@
 import * as ui from "hyperoop";
-import { Router } from "hyperoop-router";
+import { IMainController } from "./apiref";
 
-export class Main extends ui.Actions<{}> {
-    public readonly Router: Router;
+export class MainController extends ui.Actions<{loading: number}> implements IMainController {
     constructor() {
-        super({});
-        this.Router = new Router(this, ui.h);
+        super({loading: 0});
+    }
+    public loading(on: boolean) {
+        this.State.loading += on ? 1 : -1;
     }
 }

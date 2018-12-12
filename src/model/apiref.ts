@@ -1,5 +1,7 @@
 import ITree from "../../tools/documenter/tree";
-import * as misc from "../misc";
+import * as misc from "../utils/misc";
+
+export type IReferenceTree = ITree;
 
 export interface ITOC {
     Constants:  string[];
@@ -10,16 +12,14 @@ export interface ITOC {
     Classes:    string[];
 }
 
-export function getAPIReference(name: string): ITree {
-    const funcName = misc.makeAPIReferenceGetterName(name);
-    if (!(funcName in window)) { return null; }
-    const func = window[funcName] as () => ITree;
-    if (!func) { return null; }
-    return func();
+export async function getAPIReference(name: string): Promise<IReferenceTree> {
+    const fileName = misc.makeAPIReferenceFileName(name);
+    return new Promise<IReferenceTree>((resolve) => {
+        return fetch(`static/data/${fileName}`).then((resp) => resolve(resp.json()));
+    });
 }
 
-export function getTOC(name: string): ITOC {
-    const tree = getAPIReference(name);
+export function getTOC(tree: IReferenceTree): ITOC {
     if (!tree.children) { return null; }
     const result: ITOC = {
         Classes:    [],
