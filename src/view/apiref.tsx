@@ -32,7 +32,15 @@ const onCreateMarkdownSection = (a: IAPIRefContentSectionInfo) => (el) => {
 };
 
 export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
-    <div class="uk-card" oncreate={onCreateContentSection(a)} onupdate={onCreateContentSection(a)}>
+    <div
+        class="uk-card"
+        oncreate={onCreateContentSection(a)}
+        onupdate={onCreateContentSection(a)}
+        style = { a.hash && a.hash === window.location.hash ?
+            "border: 1px solid #a9a9e9; padding: 10px 10px 10px 10px"
+            :
+            "" }
+    >
         <h4>
             {a.kind + " "}
             { a.hash ?
@@ -52,17 +60,8 @@ export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
     </div>
 );
 
-interface IHljs {
-    initHighlightingOnLoad();
-}
-
-declare const hljs: IHljs;
-
 export const APIRefContent = (a: {module: string, sections: IAPIRefContentSectionInfo[]}) => (
-    <div
-        oncreate={ hljs.initHighlightingOnLoad() }
-        onupdate={ hljs.initHighlightingOnLoad() }
-    >
+    <div>
         <h3 class="ho-h4">{a.module} API</h3>
         { a.sections.map((x) => <APIRefContentSection {...x}/>) }
     </div>
