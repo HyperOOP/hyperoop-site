@@ -1,4 +1,5 @@
 import * as ui from "hyperoop";
+import scrollIntoView from "scroll-into-view";
 import { IHTargetAttributes } from "../utils/hroute";
 import { ISidebarSectionInfo, SideBar } from "./sidebar";
 
@@ -22,8 +23,7 @@ declare function marked(txt: string, options: { sanitize: boolean}): string;
 
 const onCreateContentSection = (a: IAPIRefContentSectionInfo) => (el) => {
     if (a.hash && a.hash === window.location.hash) {
-        el.scrollIntoView();
-        window.scrollBy(0, -100);
+        scrollIntoView(el);
     }
 };
 
