@@ -1,6 +1,12 @@
 import * as ui from "hyperoop";
 import { Router } from "hyperoop-router";
-import { getAPIReference, getTOC, IReferenceTree, ITOC } from "../model/apiref";
+import {
+    getAPIReference,
+    getTOC,
+    IndexingTable,
+    IReferenceTree,
+    ITOC,
+    TopLevelSectionsOrder } from "../model/apiref";
 import * as misc from "../utils/misc";
 import { IAPIRefContentSectionInfo } from "../view/apiref";
 import { ISidebarSectionInfo } from "../view/sidebar";
@@ -8,6 +14,7 @@ import { ISidebarSectionInfo } from "../view/sidebar";
 interface IModuleRefData {
     tree: IReferenceTree;
     toc: ITOC;
+    tab: IndexingTable;
 }
 
 type APIRefData = {
@@ -53,8 +60,10 @@ export class APIRefController {
             this.mainCtrl.loading(false);
         }
         if (!tree) { return; }
+        const [toc, tab] = getTOC(tree);
         this.ready[modname] = {
-            toc: getTOC(tree),
+            tab,
+            toc,
             tree,
         };
         this.setModule(modname);
@@ -62,7 +71,7 @@ export class APIRefController {
 
     private setModule(modname: string) {
         this.TOCCtrl.setTOC(modname, this.ready[modname].toc);
-        this.TreeCtrl.setTree(modname, this.ready[modname].tree);
+        this.TreeCtrl.setTree(modname, this.ready[modname].tree, this.ready[modname].tab);
     }
 }
 
@@ -107,22 +116,24 @@ function getKind(ch: IReferenceTree): ContentItemKind {
 
 function makeAPIRefContentSections(
     tree: IReferenceTree,
+    modname: string,
     s: IAPIRefContentSectionInfo[] = [],
     prefix: string = null): IAPIRefContentSectionInfo[] {
 
     for (const ch of tree.children) {
         const kind = getKind(ch);
         let name = kind === "Constructor" ? "" : ch.name;
-        if (prefix) { name = `${prefix}.${name}`}
+        if (prefix && kind !== "Constructor") { name = `${prefix}.${name}`; }
         s.push({
             comment: ch.commentText,
             decl: ch.decl,
+            hash: prefix ? undefined : `#apiref-${modname}-${name}`,
             kind,
             name,
         });
 
         if (ch.children && ch.children.length) {
-            makeAPIRefContentSections(ch, s, name);
+            makeAPIRefContentSections(ch, modname, s, name);
         }
     }
     return s;
@@ -143,10 +154,11 @@ export class APIRefContentController extends ui.Actions<IAPIRefContentData> {
         });
     }
 
-    public async setTree(modname: string, tree: IReferenceTree) {
+    public async setTree(modname: string, tree: IReferenceTree, tab: IndexingTable) {
+        tree.children = tree.children.sort((a, b) => tab[a.name] - tab[b.name]);
         this.set({
             modName: modname,
-            sections: makeAPIRefContentSections(tree),
+            sections: makeAPIRefContentSections(tree, modname),
             tree,
         });
     }
@@ -156,9 +168,7 @@ type sectionName = keyof ITOC;
 
 function makeSidebarSections(modName: string, toc: ITOC): ISidebarSectionInfo[] {
     const result: ISidebarSectionInfo[] = [];
-    const sections: sectionName[] = [
-        "Constants", "Variables", "Types", "Interfaces", "Functions", "Classes"];
-    for (const sectName of sections) {
+    for (const sectName of TopLevelSectionsOrder) {
         const tocItems = toc[sectName];
         if (tocItems.length < 1) {
             continue;

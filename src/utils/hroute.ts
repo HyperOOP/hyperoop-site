@@ -25,7 +25,7 @@ function parseHRoute(hashPattern: string, hashMatch: string, exact: boolean): IH
     const parts = hashPattern.slice(1).split("-");
     const mparts = hashMatch.slice(1).split("-");
 
-    if (parts.length > mparts.length || (exact && parts.length < mparts.length)) {
+    if (exact && parts.length !== mparts.length) {
         return null;
     }
 
@@ -36,8 +36,9 @@ function parseHRoute(hashPattern: string, hashMatch: string, exact: boolean): IH
         params: {},
     };
 
-    const len = parts.length;
-    for (let i = 0; i < len; i++) {
+    const plen = parts.length;
+    const mlen = mparts.length;
+    for (let i = 0; i < plen && i < mlen; i++) {
         let [p, u] = [parts[i], mparts[i]];
         if (":" === p[0]) {
             p = p.slice(1);
@@ -47,7 +48,7 @@ function parseHRoute(hashPattern: string, hashMatch: string, exact: boolean): IH
         }
         result.hashMatch += u + "-";
     }
-
+    result.hashMatch = result.hashMatch.slice(0, -1);
     return result;
 }
 

@@ -27,7 +27,7 @@ async function main() {
     const apiSidebarView = () => (
         <HRoute
             exact = {false}
-            hash = "#apiref-:module"
+            hash = "#apiref-:module-:identifier"
             component = {APIRefSidebar(apirefController.TOCCtrl.State.sections)}/>
     );
 

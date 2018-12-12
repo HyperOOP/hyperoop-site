@@ -3,14 +3,18 @@ import * as misc from "../utils/misc";
 
 export type IReferenceTree = ITree;
 
-export interface ITOC {
-    Constants:  string[];
-    Variables:  string[];
-    Types:      string[];
-    Interfaces: string[];
-    Functions:  string[];
-    Classes:    string[];
-}
+type TopLevelSections = "Constants" | "Variables" | "Types" | "Interfaces" | "Functions" | "Classes";
+
+export const TopLevelSectionsOrder: TopLevelSections[] = [
+    "Constants", "Variables", "Types", "Interfaces", "Functions", "Classes"];
+
+export type ITOC = {
+    [name in TopLevelSections]: string[];
+};
+
+export type IndexingTable = {
+    [name in string]: number;
+};
 
 export async function getAPIReference(name: string): Promise<IReferenceTree> {
     const fileName = misc.makeAPIReferenceFileName(name);
@@ -19,7 +23,7 @@ export async function getAPIReference(name: string): Promise<IReferenceTree> {
     });
 }
 
-export function getTOC(tree: IReferenceTree): ITOC {
+export function getTOC(tree: IReferenceTree): [ITOC, IndexingTable] {
     if (!tree.children) { return null; }
     const result: ITOC = {
         Classes:    [],
@@ -54,5 +58,19 @@ export function getTOC(tree: IReferenceTree): ITOC {
             throw new Error(`Mom, what is it ${ch.kind}?`);
         }
     }
-    return result;
+
+    for (const name in result) {
+        result[name] = result[name].sort();
+    }
+
+    const tab: IndexingTable = {};
+    let i = 1;
+    for (const name of TopLevelSectionsOrder) {
+        for (const ident of result[name]) {
+            tab[ident] = i;
+            i++;
+        }
+    }
+
+    return [result, tab];
 }

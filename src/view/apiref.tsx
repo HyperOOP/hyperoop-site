@@ -6,6 +6,7 @@ export const APIRefSidebar = (info: ISidebarSectionInfo[]) => (a: IHTargetAttrib
     <SideBar
         title = { "module" in a.match.params ? `${a.match.params.module} API` : null }
         sections = { "module" in a.match.params ? info : null }
+        activeHash = { a.match.hashMatch }
     />
 );
 
@@ -14,17 +15,37 @@ export interface IAPIRefContentSectionInfo {
     name: string;
     decl: string;
     comment: string;
+    hash?: string;
 }
 
 declare function marked(txt: string, options: { sanitize: boolean}): string;
 
+const onCreateContentSection = (a: IAPIRefContentSectionInfo) => (el) => {
+    if (a.hash && a.hash === window.location.hash) {
+        el.scrollIntoView();
+        window.scrollBy(0, -100);
+    }
+};
+
+const onCreateMarkdownSection = (a: IAPIRefContentSectionInfo) => (el) => {
+    el.innerHTML = marked(a.comment, { sanitize: true });
+};
+
 export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
-    <div style="margin-top: 50px">
-        <h4>{a.kind} <span class="ho-identifier">{a.name}</span></h4>
+    <div class="uk-card" oncreate={onCreateContentSection(a)} onupdate={onCreateContentSection(a)}>
+        <h4>
+            {a.kind + " "}
+            { a.hash ?
+                <a href={a.hash}>
+                    <span class="ho-identifier">{a.name}</span>
+                </a>
+                :
+                <span class="ho-identifier">{a.name}</span> }
+        </h4>
         <pre><code class="typescript">{a.decl}</code></pre>
         <p
-            oncreate={(el) => el.innerHTML = marked(a.comment, { sanitize: true })}
-            onupdate={(el) => el.innerHTML = marked(a.comment, { sanitize: true })}
+            oncreate={onCreateMarkdownSection(a)}
+            onupdate={onCreateMarkdownSection(a)}
         >
             {a.comment}
         </p>
