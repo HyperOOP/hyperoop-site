@@ -1,4 +1,4 @@
-outDir = "site/static/data"
+outDir = "site/built/data"
 
 [modules.HyperOOP]
 path = "node_modules/hyperoop/dist"

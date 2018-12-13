@@ -19,7 +19,7 @@ export type IndexingTable = {
 export async function getAPIReference(name: string): Promise<IReferenceTree> {
     const fileName = misc.makeAPIReferenceFileName(name);
     return new Promise<IReferenceTree>((resolve) => {
-        return fetch(`static/data/${fileName}`).then((resp) => resolve(resp.json()));
+        return fetch(`built/data/${fileName}`).then((resp) => resolve(resp.json()));
     });
 }
 

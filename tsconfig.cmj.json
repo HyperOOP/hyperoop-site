@@ -8,7 +8,7 @@
       "jsxFactory": "ui.h",
       "moduleResolution": "node",
       "esModuleInterop": true,
-      "outDir": "static/js",
+      "outDir": "site/built/js",
       "lib": [
           "es6",
           "dom"

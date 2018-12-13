@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <title>HyperOOP</title>
 
     <!-- UIkit CSS -->
-    <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="built/css/style.css" />
 
     <!-- UIkit JS  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.24/js/uikit-icons.min.js"></script>
  
-    <!-- Highlight.js TypeScript -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- Prism.js -->
+    <link href="css/prism.css" rel="stylesheet" />
 
     <!-- Marked -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -29,7 +27,7 @@
     <div uk-sticky="media: 960" class="uk-container uk-container-expand ho-navbar">
     <nav uk-navbar class="uk-navbar-container">
         <div class="uk-navbar-left">
-            <img src="static/img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image">
+            <img src="img/logo.png" alt="HyperOOP" class="uk-navbar-item ho-logo-image">
             <span class="ho-logo-text">HyperOOP</span>
         </div>
         <div class="uk-navbar-right uk-visible@m" id="navbarPlace">
@@ -44,7 +42,8 @@
         <div class="uk-container uk-container-small uk-position-relative" id="contentPlace">
         </div>
     </div>
-       
-    <script src="static/js/index.js"></script>
+
+    <script src="js/prism.js"></script>
+    <script src="built/js/index.js"></script>
 </body>
 </html>

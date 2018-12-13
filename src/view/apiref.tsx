@@ -3,6 +3,13 @@ import scrollIntoView from "scroll-into-view";
 import { IHTargetAttributes } from "../utils/hroute";
 import { ISidebarSectionInfo, SideBar } from "./sidebar";
 
+declare interface IPrism {
+    languages: {[name in string]: any};
+    highlight(text: string, grammar: any, language: string): string;
+}
+
+declare const Prism: IPrism;
+
 export const APIRefSidebar = (info: ISidebarSectionInfo[]) => (a: IHTargetAttributes) => (
     <SideBar
         title = { "module" in a.match.params ? `${a.match.params.module} API` : null }
@@ -25,15 +32,33 @@ const onCreateContentSection = (a: IAPIRefContentSectionInfo) => (el) => {
     if (a.hash === window.location.hash) { scrollIntoView(el); }
 };
 
-const onCreateMarkdownSection = (a: IAPIRefContentSectionInfo) => (el) => {
+const onCreateMarkdownSection = (a: {comment: string}) => (el) => {
     el.innerHTML = marked(a.comment, { sanitize: true });
 };
 
+const highlightCode = (text: string) => (el) => {
+    const lang = "tsx";
+    el.innerHTML = Prism.highlight(text, Prism.languages[lang], lang);
+};
+
+const Code = (a: {decl: string}) => (
+    <pre style="margin-left: 20px">
+        <code
+            oncreate = {highlightCode(a.decl)}
+            onupdate = {highlightCode(a.decl)}
+        >
+        </code>
+    </pre>
+);
+
+const Comment = (a: {comment: string}) => (
+    <p oncreate={onCreateMarkdownSection(a)} style="margin-left: 20px">
+        {a.comment}
+    </p>
+);
+
 export const APIRefContentMajorSection = (a: IAPIRefContentSectionInfo) => (
-    <div
-        oncreate={onCreateContentSection(a)}
-        onupdate={onCreateContentSection(a)}
-    >
+    <div onupdate={onCreateContentSection(a)} class="ho-content-section">
         <h4
             class={a.hash === window.location.hash ?
                 "ho-major-content-active-header" : "ho-major-content-header"}
@@ -43,34 +68,24 @@ export const APIRefContentMajorSection = (a: IAPIRefContentSectionInfo) => (
                 <span class="ho-identifier">{a.name}</span>
             </a>
         </h4>
-        <pre><code class="typescript">{a.decl}</code></pre>
-        <p
-            oncreate={onCreateMarkdownSection(a)}
-            onupdate={onCreateMarkdownSection(a)}
-        >
-            {a.comment}
-        </p>
+        <Code decl = {a.decl}/>
+        <Comment comment = {a.comment}/>
     </div>
 );
 
 export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
-    <div>
+    <div class="ho-content-section">
         <h4>
-            {a.kind + " "}<span class="ho-identifier">{a.name}</span>
+            {a.kind.toLowerCase() + " "}<span class="ho-identifier">{a.name}</span>
         </h4>
-        <pre><code class="typescript">{a.decl}</code></pre>
-        <p
-            oncreate={onCreateMarkdownSection(a)}
-            onupdate={onCreateMarkdownSection(a)}
-        >
-            {a.comment}
-        </p>
+        <Code decl = {a.decl}/>
+        <Comment comment = {a.comment}/>
     </div>
 );
 
 export const APIRefContent = (a: {module: string, sections: IAPIRefContentSectionInfo[]}) => (
     <div>
-        <h3 class="ho-h4">{a.module} API</h3>
+        <h3 class="ho-h4" style="margin-bottom: 60px">{a.module} API</h3>
         { a.sections.map((x) => x.hash ? <APIRefContentMajorSection {...x}/> : <APIRefContentSection {...x}/>) }
     </div>
 );

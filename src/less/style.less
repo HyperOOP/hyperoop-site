@@ -145,20 +145,24 @@
 }
 
 .ho-major-content-active-header {
-	animation-name: fadeInBgColor;
+	animation-name: major-content-header-fade;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-in;
 	animation-duration: 3s;
     .ho-major-content-header()
 }
 
-@keyframes fadeInBgColor {
+@keyframes major-content-header-fade {
 	0% {
         background-color: lighten(@base-color-b, 40%);
 	}
 	100% {
         background-color: lighten(@base-color-b, 50%);
 	}
+}
+
+.ho-content-section {
+    margin-bottom: 20px;
 }
 
 @media (min-width: @breakpoint-small) {
