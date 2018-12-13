@@ -5,13 +5,10 @@
   "description": "Site representing HyperOOP",
   "main": "dist/index.html",
   "scripts": {
-    "watch:css": "npm-watch build:css",
-    "watch:index": "npm-watch build:index",
     "build:css": "lessc --rewrite-urls=all src/less/style.less site/built/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
-    "build:documenter": "rimraf tools/dist && tsc -p tools/documenter/tsconfig.json",
+    "build:documenter": "rimraf bin && tsc -p tools/documenter/tsconfig.json",
     "build:apidocs": "npm run build:documenter && node bin/documenter.js apidocs.toml",
-    "build:index": "rollup -c -i src/index.tsx -o site/built/js/index.js -m -f umd",
-    "build:index:tsc": "tsc -p tsconfig.cmj.json",
+    "build:index": "rimraf site/built/js && rollup -c -i src/index.tsx -o site/built/js/index.js -m -f umd",
     "build": "npm run build:css && npm run build:apidocs && npm run build:index",
     "clean:built": "rimraf site/built",
     "clean:bin": "rimraf bin",
@@ -19,7 +16,8 @@
     "lint:tools": "tslint -c tslint.json 'tools/**/*.ts'",
     "lint:src": "tslint -c tslint.json 'src/**/*.ts'",
     "lint": "npm run lint:tools && npm run lint:src",
-    "serve": "http-server site"
+    "watch:css": "npm-watch build:css",
+    "serve": "rollup -c rollup.config.serve.js -i src/index.tsx -o site/built/js/index.js -m -f umd"
   },
   "watch": {
     "build:css": {
@@ -27,12 +25,6 @@
         "src/less"
       ],
       "extensions": "less"
-    },
-    "build:index": {
-      "patterns": [
-        "src"
-      ],
-      "extensions": "ts,tsx"
     }
   },
   "repository": {
@@ -54,7 +46,6 @@
   "homepage": "https://github.com/algebraic-brain/hyperoop-site#readme",
   "devDependencies": {
     "@types/node": "^10.12.12",
-    "http-server": "^0.11.1",
     "less": "^3.9.0",
     "less-plugin-clean-css": "^1.5.1",
     "npm-watch": "^0.5.0",
@@ -62,12 +53,13 @@
     "rollup": "^0.67.4",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-serve": "^0.6.0",
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-typescript2": "^0.18.0",
+    "toml": "^2.3.3",
     "tslint": "^5.11.0",
     "typescript": "^3.2.1",
-    "uikit": "^3.0.0-rc.25",
-    "toml": "^2.3.3"
+    "uikit": "^3.0.0-rc.25"
   },
   "dependencies": {
     "@types/scroll-into-view": "^1.6.6",

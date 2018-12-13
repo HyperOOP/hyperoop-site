@@ -52,8 +52,11 @@ const Code = (a: {decl: string}) => (
 );
 
 const Comment = (a: {comment: string}) => (
-    <p oncreate={onCreateMarkdownSection(a)} style="margin-left: 20px">
-        {a.comment}
+    <p
+        oncreate = {onCreateMarkdownSection(a)}
+        onupdate = {onCreateMarkdownSection(a)}
+        style = "margin-left: 20px"
+    >
     </p>
 );
 
@@ -65,7 +68,7 @@ export const APIRefContentMajorSection = (a: IAPIRefContentSectionInfo) => (
         >
             {a.kind + " "}
             <a href={a.hash}>
-                <span class="ho-identifier">{a.name}</span>
+                <span class="ho-header-identifier">{a.name}</span>
             </a>
         </h4>
         <Code decl = {a.decl}/>
@@ -75,8 +78,8 @@ export const APIRefContentMajorSection = (a: IAPIRefContentSectionInfo) => (
 
 export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
     <div class="ho-content-section">
-        <h4>
-            {a.kind.toLowerCase() + " "}<span class="ho-identifier">{a.name}</span>
+        <h4 class="ho-content-header">
+            {a.kind.toLowerCase() + " "}<span class="ho-header-identifier">{a.name}</span>
         </h4>
         <Code decl = {a.decl}/>
         <Comment comment = {a.comment}/>
@@ -84,8 +87,15 @@ export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
 );
 
 export const APIRefContent = (a: {module: string, sections: IAPIRefContentSectionInfo[]}) => (
-    <div>
+    <div onupdate={(el) => {
+        if (window.location.hash.split("-").length < 3) {
+            scrollIntoView(el, { align: { topOffset: 200 } as any });
+        }
+    }}>
         <h3 class="ho-h4" style="margin-bottom: 60px">{a.module} API</h3>
-        { a.sections.map((x) => x.hash ? <APIRefContentMajorSection {...x}/> : <APIRefContentSection {...x}/>) }
+        { a.sections.map((x) => x.hash ?
+            <APIRefContentMajorSection {...x}/>
+            :
+            <APIRefContentSection {...x}/>) }
     </div>
 );
