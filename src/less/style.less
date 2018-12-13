@@ -138,6 +138,29 @@
     color: cornflowerblue;
 }
 
+.ho-major-content-header {
+    background-color: lighten(@base-color-b, 50%);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.ho-major-content-active-header {
+	animation-name: fadeInBgColor;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 3s;
+    .ho-major-content-header()
+}
+
+@keyframes fadeInBgColor {
+	0% {
+        background-color: lighten(@base-color-b, 40%);
+	}
+	100% {
+        background-color: lighten(@base-color-b, 50%);
+	}
+}
+
 @media (min-width: @breakpoint-small) {
     .ho-main {
         margin-left: 0 !important;

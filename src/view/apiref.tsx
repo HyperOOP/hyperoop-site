@@ -22,33 +22,41 @@ export interface IAPIRefContentSectionInfo {
 declare function marked(txt: string, options: { sanitize: boolean}): string;
 
 const onCreateContentSection = (a: IAPIRefContentSectionInfo) => (el) => {
-    if (a.hash && a.hash === window.location.hash) {
-        scrollIntoView(el);
-    }
+    if (a.hash === window.location.hash) { scrollIntoView(el); }
 };
 
 const onCreateMarkdownSection = (a: IAPIRefContentSectionInfo) => (el) => {
     el.innerHTML = marked(a.comment, { sanitize: true });
 };
 
-export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
+export const APIRefContentMajorSection = (a: IAPIRefContentSectionInfo) => (
     <div
-        class="uk-card"
         oncreate={onCreateContentSection(a)}
         onupdate={onCreateContentSection(a)}
-        style = { a.hash && a.hash === window.location.hash ?
-            "border: 1px solid #a9a9e9; padding: 10px 10px 10px 10px"
-            :
-            "" }
     >
-        <h4>
+        <h4
+            class={a.hash === window.location.hash ?
+                "ho-major-content-active-header" : "ho-major-content-header"}
+        >
             {a.kind + " "}
-            { a.hash ?
-                <a href={a.hash}>
-                    <span class="ho-identifier">{a.name}</span>
-                </a>
-                :
-                <span class="ho-identifier">{a.name}</span> }
+            <a href={a.hash}>
+                <span class="ho-identifier">{a.name}</span>
+            </a>
+        </h4>
+        <pre><code class="typescript">{a.decl}</code></pre>
+        <p
+            oncreate={onCreateMarkdownSection(a)}
+            onupdate={onCreateMarkdownSection(a)}
+        >
+            {a.comment}
+        </p>
+    </div>
+);
+
+export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
+    <div>
+        <h4>
+            {a.kind + " "}<span class="ho-identifier">{a.name}</span>
         </h4>
         <pre><code class="typescript">{a.decl}</code></pre>
         <p
@@ -63,6 +71,6 @@ export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
 export const APIRefContent = (a: {module: string, sections: IAPIRefContentSectionInfo[]}) => (
     <div>
         <h3 class="ho-h4">{a.module} API</h3>
-        { a.sections.map((x) => <APIRefContentSection {...x}/>) }
+        { a.sections.map((x) => x.hash ? <APIRefContentMajorSection {...x}/> : <APIRefContentSection {...x}/>) }
     </div>
 );

@@ -35,8 +35,8 @@ export class APIRefController {
 
     constructor(private mainCtrl: IMainController) {
         this.Router = new Router(this, ui.h);
-        this.TOCCtrl = new APIRefTOCController();
         this.TreeCtrl = new APIRefContentController();
+        this.TOCCtrl = new APIRefTOCController(() => this.TreeCtrl.Renderer.scheduleRender());
     }
 
     get Fresh() { return this.fresh; }
@@ -166,7 +166,7 @@ export class APIRefContentController extends ui.Actions<IAPIRefContentData> {
 
 type sectionName = keyof ITOC;
 
-function makeSidebarSections(modName: string, toc: ITOC): ISidebarSectionInfo[] {
+function makeSidebarSections(modName: string, toc: ITOC, refreshContent: () => void): ISidebarSectionInfo[] {
     const result: ISidebarSectionInfo[] = [];
     for (const sectName of TopLevelSectionsOrder) {
         const tocItems = toc[sectName];
@@ -175,7 +175,12 @@ function makeSidebarSections(modName: string, toc: ITOC): ISidebarSectionInfo[] 
         }
         const info: ISidebarSectionInfo = {
             items: tocItems.map((name) =>
-                ({ active: false, title: name, hash: misc.makeAPIReferenceItemHash(modName, name)})),
+                ({
+                    active: false,
+                    hash: misc.makeAPIReferenceItemHash(modName, name),
+                    refreshContent,
+                    title: name,
+                })),
             section: { title: sectName },
         };
         result.push(info);
@@ -189,7 +194,7 @@ interface IAPIRefTOCData {
 }
 
 export class APIRefTOCController extends ui.Actions<IAPIRefTOCData> {
-    constructor() {
+    constructor(private refreshContent: () => void) {
         super({
             sections: [],
             toc: {} as ITOC,
@@ -197,6 +202,6 @@ export class APIRefTOCController extends ui.Actions<IAPIRefTOCData> {
     }
 
     public async setTOC(modName: string, toc: ITOC) {
-        this.set({toc, sections: makeSidebarSections(modName, toc)});
+        this.set({toc, sections: makeSidebarSections(modName, toc, this.refreshContent)});
     }
 }

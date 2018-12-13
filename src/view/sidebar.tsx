@@ -13,11 +13,13 @@ export interface ISidebarLiArgs {
     active: boolean;
     title:  string;
     hash:   string;
+
+    refreshContent: () => void;
 }
 
 export const SidebarLi = (a: ISidebarLiArgs) => {
     return a.active ?
-        <li class="uk-active"><Link to={"./" + a.hash}>{a.title}</Link></li>
+        <li class="uk-active"><Link to={"./" + a.hash} onclick={a.refreshContent}>{a.title}</Link></li>
         :
         <li><Link to={"./" + a.hash}>{a.title}</Link></li>;
 };
