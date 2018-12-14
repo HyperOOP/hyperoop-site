@@ -95,8 +95,8 @@ export const APIRefContent = (a: {version?: string, module: string, sections: IA
         <h3 class="ho-h4" style="margin-bottom: 60px">
             {a.module} API {
                 a.version ?
-                    <span class="uk-text-small" style="position: relative; top: 5px">
-                        {`version ${a.version}`}
+                    <span class="uk-text-small" style="position: relative; top: 5px; color: #999">
+                        {`version ${a.version}`}, <a href="https://www.typescriptlang.org/">TypeScript</a>
                     </span>
                     :
                     ""
