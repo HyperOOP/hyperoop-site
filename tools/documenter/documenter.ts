@@ -7,7 +7,8 @@ import * as ts from "typescript";
 import ITree from "./tree";
 
 interface IModuleConf {
-    path: string;
+    package: string;
+    path:    string;
     exclude: string[];
 }
 
@@ -62,7 +63,7 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
 
         let re = /^(export\s+declare|export)?(.*)/gms;
         if (complexNode(n)) {
-            re = /^(export\s+declare|export)?(.*)\{\s*\n/gms;
+            re = /^(export\s+declare|export)?(((?!\{\s*\n).)*)\{\s*\n/gms;
         }
 
         const d = decl.slice(n.comment.length).trim();
@@ -119,10 +120,12 @@ class Documenter {
     }
 
     private async genModuleDocs(modName: string, modCfg: IModuleConf, outDir: string) {
+        const packString = await readFile(modCfg.package, {encoding: "utf8"});
+        const ver = JSON.parse(packString).version as string;
         const files = (await readDir(modCfg.path)).filter((name) =>
             /.*\.d\.ts$/.test(name) &&
             modCfg.exclude.indexOf(name.slice(0, -5)) < 0);
-        const tree = {kind: "ModuleDeclaration", children: []};
+        const tree = {kind: "ModuleDeclaration", children: [], version: ver};
         for (const fname of files) {
             const fpath = path.join(modCfg.path, fname);
             await this.genFileDoc(modName, fpath, tree);

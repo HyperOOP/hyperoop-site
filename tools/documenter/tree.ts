@@ -7,4 +7,5 @@ export default interface ITree {
     children?:    ITree[];
     name?:        string;
     keyword?:     string;
+    version?:     string;
 }

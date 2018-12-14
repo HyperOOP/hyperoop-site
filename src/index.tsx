@@ -33,6 +33,7 @@ async function main() {
 
     const apiRefContentView = () => (
         <APIRefContent
+            version = {apirefController.TreeCtrl.State.tree.version}
             module = {apirefController.TreeCtrl.State.modName}
             sections = {apirefController.TreeCtrl.State.sections}
         />

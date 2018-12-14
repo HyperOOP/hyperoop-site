@@ -86,13 +86,22 @@ export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
     </div>
 );
 
-export const APIRefContent = (a: {module: string, sections: IAPIRefContentSectionInfo[]}) => (
+export const APIRefContent = (a: {version?: string, module: string, sections: IAPIRefContentSectionInfo[]}) => (
     <div onupdate={(el) => {
         if (window.location.hash.split("-").length < 3) {
             scrollIntoView(el, { align: { topOffset: 200 } as any });
         }
     }}>
-        <h3 class="ho-h4" style="margin-bottom: 60px">{a.module} API</h3>
+        <h3 class="ho-h4" style="margin-bottom: 60px">
+            {a.module} API {
+                a.version ?
+                    <span class="uk-text-small" style="position: relative; top: 5px">
+                        {`version ${a.version}`}
+                    </span>
+                    :
+                    ""
+            }
+        </h3>
         { a.sections.map((x) => x.hash ?
             <APIRefContentMajorSection {...x}/>
             :

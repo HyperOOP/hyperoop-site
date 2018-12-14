@@ -2,8 +2,10 @@ outDir = "site/built/data"
 
 [modules.HyperOOP]
 path = "node_modules/hyperoop/dist"
+package = "node_modules/hyperoop/package.json"
 exclude = ["proxperty"]
 
 [modules.Router]
 path = "node_modules/hyperoop-router/dist"
+package = "node_modules/hyperoop-router/package.json"
 exclude = ["index"]
