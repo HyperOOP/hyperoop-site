@@ -51,6 +51,7 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
                 .split(/\n\s*\*/)
                 .filter((s) => !/^\s*\@/.test(s))
                 .join("\n")
+                .replace(/( )+/g, " ")
                 .trim();
         } else {
             return;

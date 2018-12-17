@@ -78,9 +78,9 @@ export const APIRefContentMajorSection = (a: IAPIRefContentSectionInfo) => (
 
 export const APIRefContentSection = (a: IAPIRefContentSectionInfo) => (
     <div class="ho-content-section">
-        <h4 class="ho-content-header">
+        {/*<h4 class="ho-content-header">
             {a.kind.toLowerCase() + " "}<span class="ho-header-identifier">{a.name}</span>
-        </h4>
+        </h4>*/}
         <Code decl = {a.decl}/>
         <Comment comment = {a.comment}/>
     </div>

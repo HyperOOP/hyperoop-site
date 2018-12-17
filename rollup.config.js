@@ -13,7 +13,7 @@ export default {
             namedExports: {
               'node_modules/scroll-into-view/scrollIntoView.js': [ 'default' ]
             }
-        })
-        //terser()
+        }),
+        terser()
     ]
 }

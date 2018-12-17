@@ -6,7 +6,7 @@ export type IReferenceTree = ITree;
 type TopLevelSections = "Constants" | "Variables" | "Types" | "Interfaces" | "Functions" | "Classes";
 
 export const TopLevelSectionsOrder: TopLevelSections[] = [
-    "Constants", "Variables", "Types", "Interfaces", "Functions", "Classes"];
+    "Classes", "Functions", "Constants", "Variables", "Types", "Interfaces"];
 
 export type ITOC = {
     [name in TopLevelSections]: string[];

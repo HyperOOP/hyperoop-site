@@ -35,8 +35,8 @@ export interface ISidebarDivArgs {
     sections: ISidebarSectionInfo[];
 }
 
-const makeSection = (info: ISidebarSectionInfo, activeHash: string): ui.VNode[] => {
-    const result: ui.VNode[] = [SidebarSectionLi(info.section)];
+const makeSection = (info: ISidebarSectionInfo, activeHash: string): ui.IVirtualNode[] => {
+    const result: ui.IVirtualNode[] = [SidebarSectionLi(info.section)];
     return result.concat(info.items.map((item) => (
         <SidebarLi {...{...item, active: item.hash === activeHash}}/>
     )));

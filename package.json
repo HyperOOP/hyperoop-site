@@ -63,8 +63,8 @@
   },
   "dependencies": {
     "@types/scroll-into-view": "^1.6.6",
-    "hyperoop": "^0.3.4",
-    "hyperoop-router": "^0.1.15",
+    "hyperoop": "^0.4.2",
+    "hyperoop-router": "^0.1.16",
     "scroll-into-view": "^1.9.3"
   }
 }
