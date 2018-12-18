@@ -23,6 +23,7 @@ export interface IAPIRefContentSectionInfo {
     name:    string;
     decl:    string;
     comment: string;
+    links:   {[name in string]: string};
     hash?:   string;
 
     subSections?: IAPIRefContentSectionInfo[];

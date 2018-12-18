@@ -13,8 +13,8 @@ import { ISidebarSectionInfo } from "../view/sidebar";
 
 interface IModuleRefData {
     tree: IReferenceTree;
-    toc: ITOC;
-    tab: IndexingTable;
+    toc:  ITOC;
+    tab:  IndexingTable;
 }
 
 type APIRefData = {
@@ -114,9 +114,14 @@ function getKind(ch: IReferenceTree): ContentItemKind {
         }
 }
 
+type ILinks = {
+    [name in string]: string;
+};
+
 function makeAPIRefContentSections(
     tree: IReferenceTree,
     modname: string,
+    links: ILinks,
     s: IAPIRefContentSectionInfo[] = [],
     prefix: string = null): IAPIRefContentSectionInfo[] {
 
@@ -129,12 +134,13 @@ function makeAPIRefContentSections(
             decl: ch.decl,
             hash: prefix ? undefined : `#apiref-${modname}-${name}`,
             kind,
+            links,
             name,
         };
 
         if (ch.children && ch.children.length) {
             sInfo.subSections = [];
-            makeAPIRefContentSections(ch, modname, sInfo.subSections, name);
+            makeAPIRefContentSections(ch, modname, links, sInfo.subSections, name);
         }
         s.push(sInfo);
     }
@@ -148,7 +154,7 @@ interface IAPIRefContentData {
 }
 
 export class APIRefContentController extends ui.Actions<IAPIRefContentData> {
-    constructor() {
+    constructor(private links: ILinks = {}) {
         super({
             modName: "",
             sections: [],
@@ -160,13 +166,11 @@ export class APIRefContentController extends ui.Actions<IAPIRefContentData> {
         tree.children = tree.children.sort((a, b) => tab[a.name] - tab[b.name]);
         this.set({
             modName: modname,
-            sections: makeAPIRefContentSections(tree, modname),
+            sections: makeAPIRefContentSections(tree, modname, this.links),
             tree,
         });
     }
 }
-
-type sectionName = keyof ITOC;
 
 function makeSidebarSections(modName: string, toc: ITOC, refreshContent: () => void): ISidebarSectionInfo[] {
     const result: ISidebarSectionInfo[] = [];
