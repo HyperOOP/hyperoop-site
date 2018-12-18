@@ -31,7 +31,7 @@ export interface IAPIRefContentSectionInfo {
 declare function marked(txt: string, options: { sanitize: boolean}): string;
 
 const onCreateContentSection = (a: IAPIRefContentSectionInfo) => (el) => {
-    if (a.hash === window.location.hash) { scrollIntoView(el, { align: { topOffset: 90 } as any }); }
+    if (a.hash === window.location.hash) { scrollIntoView(el, { align: { top: 0, topOffset: 90 } as any }); }
 };
 
 const onCreateMarkdownSection = (a: {comment: string}) => (el) => {
