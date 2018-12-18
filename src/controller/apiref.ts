@@ -124,17 +124,19 @@ function makeAPIRefContentSections(
         const kind = getKind(ch);
         let name = kind === "Constructor" ? "" : ch.name;
         if (prefix && kind !== "Constructor") { name = `${prefix}.${name}`; }
-        s.push({
+        const sInfo: IAPIRefContentSectionInfo = {
             comment: ch.commentText,
             decl: ch.decl,
             hash: prefix ? undefined : `#apiref-${modname}-${name}`,
             kind,
             name,
-        });
+        };
 
         if (ch.children && ch.children.length) {
-            makeAPIRefContentSections(ch, modname, s, name);
+            sInfo.subSections = [];
+            makeAPIRefContentSections(ch, modname, sInfo.subSections, name);
         }
+        s.push(sInfo);
     }
     return s;
 }

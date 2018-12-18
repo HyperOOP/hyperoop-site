@@ -19,17 +19,19 @@ export const APIRefSidebar = (info: ISidebarSectionInfo[]) => (a: IHTargetAttrib
 );
 
 export interface IAPIRefContentSectionInfo {
-    kind: string;
-    name: string;
-    decl: string;
+    kind:    string;
+    name:    string;
+    decl:    string;
     comment: string;
-    hash?: string;
+    hash?:   string;
+
+    subSections?: IAPIRefContentSectionInfo[];
 }
 
 declare function marked(txt: string, options: { sanitize: boolean}): string;
 
 const onCreateContentSection = (a: IAPIRefContentSectionInfo) => (el) => {
-    if (a.hash === window.location.hash) { scrollIntoView(el); }
+    if (a.hash === window.location.hash) { scrollIntoView(el, { align: { topOffset: 90 } as any }); }
 };
 
 const onCreateMarkdownSection = (a: {comment: string}) => (el) => {
@@ -73,6 +75,18 @@ export const APIRefContentMajorSection = (a: IAPIRefContentSectionInfo) => (
         </h4>
         <Code decl = {a.decl}/>
         <Comment comment = {a.comment}/>
+        { a.subSections && a.subSections.length ?
+            [
+                <h5 class="ho-minor-content-header">
+                    {
+                        a.kind === "Class" ? "Members" :
+                            a.kind === "Interface" ? "Properties" : ""
+                    }
+                </h5>,
+                ...a.subSections.map((x) => <APIRefContentSection {...x}/>),
+            ]
+            :
+            "" }
     </div>
 );
 
@@ -102,9 +116,6 @@ export const APIRefContent = (a: {version?: string, module: string, sections: IA
                     ""
             }
         </h3>
-        { a.sections.map((x) => x.hash ?
-            <APIRefContentMajorSection {...x}/>
-            :
-            <APIRefContentSection {...x}/>) }
+        { a.sections.map((x) => <APIRefContentMajorSection {...x}/>) }
     </div>
 );

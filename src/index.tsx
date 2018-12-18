@@ -1,3 +1,6 @@
+import "promise-polyfill/src/polyfill";
+import "whatwg-fetch";
+
 import * as ui from "hyperoop";
 import { APIRefController } from "./controller/apiref";
 import { MainController} from "./controller/main";

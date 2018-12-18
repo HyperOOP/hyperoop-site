@@ -55,5 +55,10 @@
 
     <script src="js/prism.js"></script>
     <script src="built/js/index.js"></script>
+    <script>
+        if (typeof Proxy === "undefined") {
+            document.getElementById("contentPlace").innerHTML = "<h2>Sorry, this site is intended for use in modern browsers only.</h2>"
+        }
+    </script>
 </body>
 </html>
