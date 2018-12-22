@@ -104,6 +104,7 @@ function getKind(ch: IReferenceTree): ContentItemKind {
             return "Constructor";
         case "FunctionDeclaration":
             return "Function";
+        case "MethodSignature":
         case "MethodDeclaration":
             return "Method";
         case "PropertySignature":
