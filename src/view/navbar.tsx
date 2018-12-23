@@ -101,10 +101,22 @@ export const NavbarMenuUl = (a: INavbarArgs) => (
                 "" }
         { a.hasDonationsPage ? <NavbarLi title="Donate" hash={misc.donateAddr} visible="m"/> : "" }
         <li class="uk-visible@m">
-            <a href="https://github.com/algebraic-brain/hyperoop/" class="uk-icon-link" uk-icon="github"></a>
+            <a
+                href="https://github.com/algebraic-brain/hyperoop/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="uk-icon-link"
+                uk-icon="github"
+            ></a>
         </li>
         <li class="uk-visible@m">
-            <a href="https://gitter.im/hyper-oop" class="uk-icon-link" uk-icon="gitter"></a>
+            <a
+                href="https://gitter.im/hyper-oop"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="uk-icon-link"
+                uk-icon="gitter"
+            ></a>
         </li>
         <NavbarDropdownIconLi title="table" hidden="m">
             <li class="uk-nav-header">API</li>
@@ -112,12 +124,20 @@ export const NavbarMenuUl = (a: INavbarArgs) => (
                             <NavbarLi title={title} hash={hash}/>) }
             <li class="uk-nav-header">Community</li>
             <li>
-                <a href="https://github.com/algebraic-brain/hyperoop/">
+                <a
+                    href="https://github.com/algebraic-brain/hyperoop/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     <span uk-icon="icon: github; ratio: 0.8"> </span> GitHub
                 </a>
             </li>
             <li>
-                <a href="https://gitter.im/hyper-oop">
+                <a
+                    href="https://gitter.im/hyper-oop"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     <span uk-icon="icon: gitter; ratio: 0.8"> </span> Gitter
                 </a>
             </li>
