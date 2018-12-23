@@ -12,7 +12,7 @@ import { NavbarMenuUl } from "./view/navbar";
 async function main() {
     const mainController = new MainController();
     const apirefController = new APIRefController(mainController);
-    const navbarController = new NavbarController(["HyperOOP", "Router"]);
+    const navbarController = new NavbarController(["HyperOOP", "Router", "RedoUndo"]);
 
     apirefController.Router.go("./#apiref-HyperOOP");
     if (apirefController.Fresh) { await apirefController.onLocationChange(null); }

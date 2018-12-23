@@ -63,9 +63,10 @@
   },
   "dependencies": {
     "@types/scroll-into-view": "^1.6.6",
-    "hyperoop": "^0.4.5",
-    "hyperoop-router": "^0.1.19",
+    "hyperoop": "^0.5.1",
+    "hyperoop-router": "^0.1.21",
     "promise-polyfill": "8.1.0",
+    "redoundo": "^0.1.13",
     "scroll-into-view": "^1.9.3",
     "whatwg-fetch": "^3.0.0"
   }

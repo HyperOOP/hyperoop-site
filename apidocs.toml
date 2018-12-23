@@ -9,3 +9,8 @@ exclude = ["proxperty"]
 path = "node_modules/hyperoop-router/dist"
 package = "node_modules/hyperoop-router/package.json"
 exclude = ["index"]
+
+[modules.RedoUndo]
+path = "node_modules/redoundo/dist"
+package = "node_modules/redoundo/package.json"
+exclude = []
