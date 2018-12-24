@@ -9,7 +9,7 @@
     "build:documenter": "rimraf bin && tsc -p tools/documenter/tsconfig.json",
     "build:apidocs": "npm run build:documenter && node bin/documenter.js apidocs.toml",
     "build:index": "rimraf site/built/js && rollup -c -i src/index.tsx -o site/built/js/index.js -f umd",
-    "minify": "uglifyjs --compress --mangle -o site/built/js/index.js -- site/built/js/index.js",
+    "minify": "uglifyjs --mangle -c \"sequences,dead_code,conditionals,booleans,unused,if_return,join_vars\" -o site/built/js/index.js -- site/built/js/index.js",
     "build": "npm run build:css && npm run build:apidocs && npm run build:index && npm run minify",
     "clean:built": "rimraf site/built",
     "clean:bin": "rimraf bin",
