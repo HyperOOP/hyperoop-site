@@ -77,6 +77,8 @@ export interface INavbarArgs {
     examples:         INavbarLiArgs[];
 }
 
+const hyperoopGithub = "https://github.com/hyperoop/";
+
 export const NavbarMenuUl = (a: INavbarArgs) => (
     <ul class="uk-navbar-nav">
         { a.searchArgs ?
@@ -102,7 +104,7 @@ export const NavbarMenuUl = (a: INavbarArgs) => (
         { a.hasDonationsPage ? <NavbarLi title="Donate" hash={misc.donateAddr} visible="m"/> : "" }
         <li class="uk-visible@m">
             <a
-                href="https://github.com/algebraic-brain/hyperoop/"
+                href={hyperoopGithub}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="uk-icon-link"
@@ -125,7 +127,7 @@ export const NavbarMenuUl = (a: INavbarArgs) => (
             <li class="uk-nav-header">Community</li>
             <li>
                 <a
-                    href="https://github.com/algebraic-brain/hyperoop/"
+                    href={hyperoopGithub}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
