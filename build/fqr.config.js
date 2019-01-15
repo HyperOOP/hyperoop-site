@@ -50,7 +50,8 @@ const
     bsConfig = {
         server: {
             injectChanges: true,
-            baseDir: "site"
+            baseDir: "site",
+            reloadDebounce: 10000,
         }
     };
 
