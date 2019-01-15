@@ -77,7 +77,7 @@ export interface INavbarArgs {
     examples:         INavbarLiArgs[];
 }
 
-const hyperoopGithub = "https://github.com/hyperoop/";
+const hyperoopGithub = "https://github.com/hyperoop/hyperoop";
 
 export const NavbarMenuUl = (a: INavbarArgs) => (
     <ul class="uk-navbar-nav">

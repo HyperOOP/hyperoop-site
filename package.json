@@ -5,20 +5,10 @@
   "description": "Site representing HyperOOP",
   "main": "dist/index.html",
   "scripts": {
-    "build:css": "lessc --rewrite-urls=all src/less/style.less site/built/css/style.css --clean-css=\"--s1 --advanced --compatibility=ie8\"",
-    "build:documenter": "rimraf bin && tsc -p tools/documenter/tsconfig.json",
-    "build:apidocs": "npm run build:documenter && node bin/documenter.js apidocs.toml",
-    "build:index": "rimraf site/built/js && rollup -c -i src/index.tsx -o site/built/js/index.js -f umd",
-    "minify": "uglifyjs --mangle -c \"sequences,dead_code,conditionals,booleans,unused,if_return,join_vars\" -o site/built/js/index.js -- site/built/js/index.js",
-    "build": "npm run build:css && npm run build:apidocs && npm run build:index && npm run minify",
-    "clean:built": "rimraf site/built",
-    "clean:bin": "rimraf bin",
-    "clean": "npm run clean:built && npm run clean:bin",
-    "lint:tools": "tslint -c tslint.json 'tools/**/*.ts'",
-    "lint:src": "tslint -c tslint.json 'src/**/*.ts'",
-    "lint": "npm run lint:tools && npm run lint:src",
-    "watch:css": "npm-watch build:css",
-    "serve": "rollup -c rollup.config.serve.js -i src/index.tsx -o site/built/js/index.js -f umd"
+    "build": "fqr build",
+    "start": "fqr start",
+    "clean": "fqr clean",
+    "wipe": "fqr wipe"
   },
   "watch": {
     "build:css": {
@@ -47,19 +37,22 @@
   "homepage": "https://github.com/algebraic-brain/hyperoop-site#readme",
   "devDependencies": {
     "@types/node": "^10.12.12",
+    "faqtor": "^0.1.6",
+    "faqtor-of-browser-sync": "0.0.2",
+    "faqtor-of-promise-all": "0.0.1",
+    "faqtor-of-rollup": "0.0.4",
+    "faqtor-of-uglify": "0.0.2",
+    "faqtor-of-watch": "0.0.4",
+    "fqr": "0.0.6",
     "less": "^3.9.0",
     "less-plugin-clean-css": "^1.5.1",
-    "npm-watch": "^0.5.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.67.4",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-serve": "^0.6.0",
     "rollup-plugin-typescript2": "^0.18.0",
     "toml": "^2.3.3",
-    "tslint": "^5.11.0",
     "typescript": "^3.2.1",
-    "uglify-js": "^3.4.9",
     "uikit": "^3.0.0-rc.25"
   },
   "dependencies": {

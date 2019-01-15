@@ -93,7 +93,7 @@ function showNodes(ast: ts.Node, source: string, tree: ITree) {
 
 class Documenter {
     public async main() {
-        if (process.argv.length < 3) {
+        if (process.argv.length < 4) {
             console.log("not enough parameters");
             process.exit(1);
         }
@@ -101,6 +101,7 @@ class Documenter {
         const cfgText = await readFile(process.argv[2], { encoding: "utf8"});
         const cfg: IConfig = parseTOML(cfgText);
 
+        cfg.outDir = process.argv[3];
         const outPath = cfg.outDir.split("/");
 
         let p = "./";

@@ -1,5 +1,3 @@
-outDir = "site/built/data"
-
 [modules.HyperOOP]
 path = "node_modules/hyperoop/dist"
 package = "node_modules/hyperoop/package.json"
