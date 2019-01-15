@@ -78,6 +78,7 @@ const
     wipe = cmd(`rimraf ${toWipe.join(" ")}`);
     reload = bs.reload("site/**/*").factor(),
     serve = bs.init(bsConfig),
-    start = all(serve, watch([buildCSS, buildDocumenter, buildDocs, buildIndex, uglify, reload]));
+    doWatch = watch([buildCSS, buildDocumenter, buildDocs, buildIndex, uglify, reload]),
+    start = seq(build, all(serve, doWatch));
 
 module.exports = { build, start, clean, wipe };

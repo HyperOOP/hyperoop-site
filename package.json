@@ -10,14 +10,6 @@
     "clean": "fqr clean",
     "wipe": "fqr wipe"
   },
-  "watch": {
-    "build:css": {
-      "patterns": [
-        "src/less"
-      ],
-      "extensions": "less"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/algebraic-brain/hyperoop-site.git"
