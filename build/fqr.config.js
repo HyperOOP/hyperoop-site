@@ -23,7 +23,7 @@ const
     indexMinDst = `${builtPath}/js/index.min.js`,
     toClean = ["bin", builtPath],
     toWipe = toClean.concat(["./node_modules", "./.rpt2_cache"]),
-    indexHTML = "site/index.html";
+    watchDebounce = 2000;
 
 const
     rollupPlugins = [
@@ -74,12 +74,13 @@ const
     uglify = minify(indexDst, indexMinDst)
         .factor()
         .task("minifying 'index.js'"),
-    build = seq(buildCSS, buildDocumenter, buildDocs, buildIndex, uglify),
+    buildAllList = [buildCSS, buildDocumenter, buildDocs, buildIndex, uglify],
+    build = seq(...buildAllList)
+        .task("build all"),
     clean = cmd(`rimraf ${toClean.join(" ")}`),
     wipe = cmd(`rimraf ${toWipe.join(" ")}`);
     reload = bs.reload("site/**/*").factor(),
     serve = bs.init(bsConfig),
-    doWatch = watch([buildCSS, buildDocumenter, buildDocs, buildIndex, uglify, reload]),
-    start = seq(build, all(serve, doWatch));
+    start = seq(build, all(serve, watch(buildAllList.concat([reload]), watchDebounce)));
 
 module.exports = { build, start, clean, wipe };
