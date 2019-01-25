@@ -2,13 +2,12 @@ const typescript = require('rollup-plugin-typescript2');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 
-const { seq, cmd } = require("faqtor");
+const { seq, cmd, all } = require("faqtor");
 
 const { roll } = require("faqtor-of-rollup");
 const { minify } = require("faqtor-of-uglify");
 const bsync = require("faqtor-of-browser-sync");
 const { watch } = require("faqtor-of-watch");
-const { all } = require("faqtor-of-promise-all");
 
 const
     bs = bsync.create("HyperOOP"),

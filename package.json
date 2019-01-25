@@ -29,9 +29,8 @@
   "homepage": "https://github.com/algebraic-brain/hyperoop-site#readme",
   "devDependencies": {
     "@types/node": "^10.12.12",
-    "faqtor": "^0.1.7",
+    "faqtor": "^0.2.1",
     "faqtor-of-browser-sync": "0.0.2",
-    "faqtor-of-promise-all": "0.0.1",
     "faqtor-of-rollup": "0.0.4",
     "faqtor-of-uglify": "0.0.2",
     "faqtor-of-watch": "^0.1.0",
