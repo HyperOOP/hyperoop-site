@@ -133,8 +133,10 @@ class Documenter {
             await this.genFileDoc(modName, fpath, tree);
         }
 
-        await writeFile(path.join(outDir, modName + "_ref.json"),
-        JSON.stringify(tree, null, 2), {flag: "w", encoding: "utf8"});
+        const data = JSON.stringify(tree, null, 2);
+        await (writeFile(path.join(outDir, modName + "_ref.json"),
+                    data, {flag: "w", encoding: "utf8"}).
+                    catch(e=>Error(e)));
     }
 
     private async genFileDoc(modName: string, filePath: string, tree: ITree) {
