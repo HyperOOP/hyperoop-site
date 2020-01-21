@@ -31,7 +31,7 @@
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "@types/node": "^13.1.8",
-    "faqtor": "^0.2.8",
+    "faqtor": "^0.2.9",
     "faqtor-of-browser-sync": "0.0.4",
     "faqtor-of-rollup": "0.0.5",
     "faqtor-of-uglify": "0.0.3",
