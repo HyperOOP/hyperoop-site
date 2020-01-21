@@ -1,6 +1,6 @@
 const typescript = require('rollup-plugin-typescript2');
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
+const resolve = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
 
 const { seq, cmd, all } = require("faqtor");
 
